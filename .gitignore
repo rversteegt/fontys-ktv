@@ -4,3 +4,5 @@ mastersofcode-domain
 mastersofcode-client
 mastersofcode-archetype
 mastersofcode-builder
+/mastersofcode-adminclient/target/
+/mastersofcode-spectatorclient/target/
