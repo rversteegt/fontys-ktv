@@ -49,7 +49,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver() {
         PebbleViewResolver viewResolver = new PebbleViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".twig");
+        viewResolver.setSuffix("");
         viewResolver.setPebbleEngine(pebbleEngine());
         return viewResolver;
     }

@@ -18,38 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/dashboard")
 public class DefaultController {
-
-//    @RequestMapping(value="/", method= RequestMethod.GET)
-//    public String index(ModelMap map) {
-//        map.addAttribute("hello", "test!");
-//        return "index";
-//    }
-    /**
-     * Displays the main dashboard for producers.
-     *
-     * @param request
-     * @return
-     */
+    
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView displayDashboard(final HttpServletRequest request) {
+    public ModelAndView testDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-
-//        mav.addObject("page", new Object() {
-//            public String lang = request.getSession().
-//                    getAttribute("lang").toString();
-//            public String uri = "/producer/dashboard";
-//            public String redirect = request.getRequestURL().toString();
-//        });
-//        mav.setViewName("producer/dashboard/index.twig");
         
         mav.addObject("page", new Object() {
             public String uri = "/mastersofcode-adminclient/dashboard";
             public String redirect = request.getRequestURL().toString();
         });
         mav.addObject("hello", "test");
-        mav.setViewName("index");
-        
-        System.out.println("IETS");
+        mav.setViewName("index.twig");
         
         return mav;
     }
