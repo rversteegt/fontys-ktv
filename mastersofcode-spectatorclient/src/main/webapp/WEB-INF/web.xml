@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app    version="3.0"
+            xmlns="http://java.sun.com/xml/ns/javaee"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ 
+         <servlet>
+		<servlet-name>spring-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+        
+        <!--
+        <listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+        -->
+
+        <!-- Regular JSP Servlet -->
+        <servlet>
+                <servlet-name>jsp</servlet-name>
+                <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+        </servlet>
+
+
+        <!-- Map all requests matching /WEB-INF/views/* to the regular JSP Servlet -->
+        <servlet-mapping>
+                <servlet-name>jsp</servlet-name>
+                <url-pattern>/WEB-INF/views/*</url-pattern>
+        </servlet-mapping>
+  
+        <!-- 
+            Otherwise:
+            Map all requests matching /app/* to the Spring Servlet
+        -->
+	<servlet-mapping>
+		<servlet-name>spring-dispatcher</servlet-name>
+		<url-pattern>/mok/*</url-pattern>
+	</servlet-mapping>
+        
+</web-app>

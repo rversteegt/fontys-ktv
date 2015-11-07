@@ -1,20 +1,18 @@
 {% extends "bootstrap.twig" %}
 
 {% block title %}
-    {{ test }}
+    {{ hello }}
 {% endblock %}
 
 {% block more_css %}
     <link href="/assets/common/css/default.css" rel="stylesheet"/>
     <link href="/assets/common/css/bootstrap/sb-admin/sb-admin.css" rel="stylesheet"/>
     <link href="/assets/common/css/bootstrap/sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="/assets/producer/css/dashboard.css" rel="stylesheet"/>
     
     <link rel="stylesheet" href="/assets/common/fancybox/jquery.fancybox.css" type="text/css" media="screen" />  
 {% endblock %}
 
 {% block more_js %}
-    <script type="text/javascript" src="/assets/producer/js/producer.js"></script>
     <script type="text/javascript" src="/assets/common/fancybox/jquery.fancybox.pack.js"></script>
     <script type="text/javascript">
 	$(document).ready(function() {
@@ -30,14 +28,14 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/app/producer/dashboard">{{ test }}</a>
+                <a class="navbar-brand" href="/app/producer/dashboard">{{ hello }}</a>
             </div>
             
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>    
-                        <a href="/logout"><i class="fa fa-sign-out"></i> {{ Logout }}</a>
+                        <a href="/logout"><i class="fa fa-sign-out"></i> Uitloggen </a>
                     </li>
                 </ul>
             </div>
@@ -52,7 +50,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            {{ test }}
+                            {{ hello }}
                         </h1>
                     </div>
                 </div>
@@ -62,7 +60,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            {{ test }}
+                            {{ hello }}
                         </p>
                     </div>
                 </div>

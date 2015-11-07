@@ -1,0 +1,33 @@
+{% extends "head.twig" %}
+
+{% block head %}
+    {% block meta %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="/assets/common/favicon.ico">
+    {% endblock %}
+
+
+    {% block css %}      
+        <link href="/assets/common/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        {% block more_css %}
+        {% endblock %}
+    {% endblock %}
+
+    {% block js %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <!--<script src="js/bootstrap.min.js"></script>-->
+
+        {% block more_js %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+{% endblock %}

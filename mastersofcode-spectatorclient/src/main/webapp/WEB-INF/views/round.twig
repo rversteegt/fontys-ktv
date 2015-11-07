@@ -1,0 +1,79 @@
+{% extends "index.twig" %}
+
+{% block title %}
+    Ronde
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12 text-center">
+                    <h2 class="brand-before">
+                        <small>Ronde {{id}}</small>
+                    </h2>
+                    <h1 class="brand-name">Foto's bewerken</h1>
+                    <hr class="tagline-divider">
+                    <h2>
+                        <small>
+                            <strong>01:12:53</strong>
+                        </small>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Ronde informatie</strong>
+                    </h2>
+                    <hr>
+                    <p>
+                        Opdracht omschrijving, moeilijkheidgraad, uitwerkingen, etc..
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Teams</strong>
+                    </h2>
+                    <hr>
+                    <p>
+                        Hier komt een lijst van alle deelnemende teams, met actuele score en eventueel status (bezig, opdracht ingeleverd, ..)
+                    </p>
+                    <ul>
+                        <li><a href="team?id=1">Team 1 naam</a></li>
+                        <li><a href="team?id=2">Team 2 naam</a></li>
+                        <li><a href="team?id=3">Team 3 naam</a></li>
+                    </ul>      
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Newsfeed</strong>
+                    </h2>
+                    <hr>
+                    <p>
+                        Hier kun je de newsfeed lezen
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
