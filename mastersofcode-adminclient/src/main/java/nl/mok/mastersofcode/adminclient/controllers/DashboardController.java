@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/dashboard")
-public class DefaultController {
+public class DashboardController {
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView testDashboard(final HttpServletRequest request) {
@@ -27,7 +27,7 @@ public class DefaultController {
             public String uri = "/mastersofcode-adminclient/dashboard";
             public String redirect = request.getRequestURL().toString();
         });
-        mav.addObject("hello", "test");
+
         mav.setViewName("index.twig");
         
         return mav;
