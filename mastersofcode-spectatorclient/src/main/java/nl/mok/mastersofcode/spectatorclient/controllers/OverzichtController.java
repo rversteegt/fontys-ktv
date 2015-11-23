@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.mok.mastersofcode.adminclient.controllers;
+package nl.mok.mastersofcode.spectatorclient.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -16,15 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Gijs
  */
 @Controller
-@RequestMapping("/dashboard")
-public class DashboardController {
+@RequestMapping("/overzicht")
+public class OverzichtController {
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView testDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
-            public String uri = "/mastersofcode-adminclient/dashboard";
+            public String uri = "/mok/overzicht";
             public String redirect = request.getRequestURL().toString();
         });
 

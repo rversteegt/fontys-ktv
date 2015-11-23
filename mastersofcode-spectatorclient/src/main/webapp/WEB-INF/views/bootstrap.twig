@@ -11,16 +11,19 @@
         <link rel="icon" href="/assets/common/favicon.ico">
     {% endblock %}
 
-    
+
     {% block css %}      
         <link href="/assets/common/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        
         {% block more_css %}
         {% endblock %}
     {% endblock %}
 
     {% block js %}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>   
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <!--<script src="js/bootstrap.min.js"></script>-->
+
         {% block more_js %}
         {% endblock %}
     {% endblock %}
