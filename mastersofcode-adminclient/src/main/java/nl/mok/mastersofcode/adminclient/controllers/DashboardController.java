@@ -8,11 +8,11 @@ package nl.mok.mastersofcode.adminclient.controllers;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import nl.mok.mastersofcode.adminclient.domain.Competition;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import remote.ws.mok.domain.Competition;
 
 /**
  *
