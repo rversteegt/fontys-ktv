@@ -4,6 +4,7 @@
 
 .table-header tr{
     border-bottom: 2px solid #afafaf;
+    margin:0;
 }
 
 .table-header tr:hover{
@@ -14,6 +15,8 @@
     text-decoration: none;    
     color: inherit;
     margin:0;
+    padding:0;
+    display:block;
 }
 
 .table-link:hover{

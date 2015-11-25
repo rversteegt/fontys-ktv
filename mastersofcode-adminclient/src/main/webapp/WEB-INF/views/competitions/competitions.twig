@@ -22,10 +22,20 @@
             {% if competitions is empty%}
                 <p> Er zijn nog geen competities </p>
             {% else %}
-                
+                <table class="table table-header">
+                    <tr>
+                        <th>Titel</th>
+                        <th>Omschrijving</th>
+                    </tr>
+                </table>
                 {% for competition in competitions %}
-
-
+                    <table class="table"> 
+                        <tr>
+                            <td><a href="test" class="table-link">{{competition.title}}</a></td>
+                            <td><a href="test" class="table-link">{{competition.description}}</a></td>
+                        </tr>
+                </table>
+                    </a>
 
                 {% endfor %}
             {% endif %}
