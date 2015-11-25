@@ -29,11 +29,11 @@ public class DashboardController {
         mav.addObject("competitions", getFakeData());
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/";
+            public String uri = "/mok/dashboard";
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("index.twig");
+        mav.setViewName("dashboard/index.twig");
         
         return mav;
     }
