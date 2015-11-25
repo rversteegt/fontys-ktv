@@ -26,8 +26,6 @@ public class DashboardController {
     public ModelAndView showDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         
-        mav.addObject("competitions", getFakeData());
-        
         mav.addObject("page", new Object() {
             public String uri = "/mok/dashboard";
             public String redirect = request.getRequestURL().toString();
@@ -38,51 +36,4 @@ public class DashboardController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.GET, value = "/competitions/new")
-    public ModelAndView showNewCompetition(final HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
-        
-        mav.addObject("page", new Object() {
-            public String uri = "/mok/competitions/new";
-            public String redirect = request.getRequestURL().toString();
-        });
-
-        mav.setViewName("competitions/competition_new.twig");
-        
-        return mav;
-    }
-    
-    @RequestMapping(method = RequestMethod.POST, value = "/competitions/new")
-    public ModelAndView addNewCompetition(final HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
-        
-        mav.addObject("page", new Object() {
-            public String uri = "/mok/competitions/new";
-            public String redirect = request.getRequestURL().toString();
-        });
-
-        mav.setViewName("competitions/competition_new.twig");
-        
-        return mav;
-    }
-    
-    
-    public List<Competition> getFakeData(){
-        List<Competition> competitions = new ArrayList<>();
-        
-        Competition c1 = new Competition();
-        c1.setId(1);
-        c1.setTitle("Titel wedstrijd 1");
-        c1.setDescription("Dit is een testwedstrijd");
-        competitions.add(c1);
-        
-        c1 = new Competition();
-        c1.setId(2);
-        c1.setTitle("JavaMastersGame2");
-        c1.setDescription("Nog een wedstrijd");
-        competitions.add(c1);
-        
-        return competitions;
-    }
-
 }
