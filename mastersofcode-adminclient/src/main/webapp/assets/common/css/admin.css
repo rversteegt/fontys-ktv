@@ -1,0 +1,26 @@
+.table-header{
+    margin: 0;
+}
+
+.table-header tr{
+    border-bottom: 2px solid #afafaf;
+}
+
+.table-header tr:hover{
+    border-bottom: 2px solid #afafaf;
+}
+
+.table-link{
+    text-decoration: none;    
+    color: inherit;
+    margin:0;
+}
+
+.table-link:hover{
+    text-decoration: none;    
+    color: inherit;
+    background-color: #eeeeee;
+}
+
+.sessions-link{text-decoration:inherit;color:inherit;}
+.sessions-link:hover{text-decoration:inherit;color:inherit;}

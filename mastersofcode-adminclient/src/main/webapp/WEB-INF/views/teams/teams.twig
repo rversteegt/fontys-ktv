@@ -8,6 +8,7 @@
     <link href="/assets/common/css/default.css" rel="stylesheet"/>
     <link href="/assets/common/css/bootstrap/sb-admin/sb-admin.css" rel="stylesheet"/>
     <link href="/assets/common/css/bootstrap/sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/common/css/admin.css" rel="stylesheet"/>
 
     <link rel="stylesheet" href="/assets/common/fancybox/jquery.fancybox.css" type="text/css" media="screen" />  
 {% endblock %}
@@ -35,19 +36,19 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>    
-                        <a href="wedstrijden"><i class="fa fa-gamepad"></i> Wedstrijden </a>
+                        <a href="/mok/"><i class="fa fa-gamepad"></i> Overzicht </a>
                     </li>
 
                     <li>    
-                        <a href="teams"><i class="fa fa-users"></i> Teams </a>
-                    </li>
-   
-                    <li>    
-                        <a href="deelnemers"><i class="fa fa-user"></i> Deelnemers </a>
+                        <a href="/mok/teams"><i class="fa fa-users"></i> Teams </a>
                     </li>
 
                     <li>    
-                        <a href="opdrachten"><i class="fa fa-file-text-o"></i> Opdrachten </a>
+                        <a href="/mok/members"><i class="fa fa-user"></i> Deelnemers </a>
+                    </li>
+
+                    <li>    
+                        <a href="/mok/assignments"><i class="fa fa-file-text-o"></i> Opdrachten </a>
                     </li>
 
                     <li>    
@@ -75,9 +76,34 @@
                 {% block content %}
                     <div class="row">
                         <div class="col-lg-12">
-                            <p>
-                                Dit is het dashboard van de admin.
-                            </p>
+                            <h4 class="page-header">Nieuwe wedstrijd</h4>
+                            <a href="/mok/competitions/new" class="btn btn-default">
+                                Nieuwe wedstrijd
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="page-header">Overzicht wedstrijden</h4>    
+                            <table class="table table-header">
+                                <tr>
+                                    <th width="10%" style="border:none;">Id</th>
+                                    <th width="30%" style="border:none;">Titel</th>
+                                    <th width="60%" style="border:none;">Omschrijving</th>                           
+                                </tr>
+                            </table>
+                            {% for comp in competitions %}
+                                <a class="table-link" href="/mok/competition/{{comp.id}}">
+                                    <table class="table table-link">
+                                        <tr>
+                                            <td width="10%">{{comp.id}}</td>
+                                            <td width="30%">{{comp.title}}</td>
+                                            <td width="60%">{{comp.description}}</td>
+                                        </tr>
+                                    </table>
+                                </a>
+                            {% endfor %}
                         </div>
                     </div>
                 {% endblock %}
