@@ -1,4 +1,4 @@
-{% extends "index.twig" %}
+{% extends "dashboard/index.twig" %}
 
 {% block title %}
     Competition
@@ -8,9 +8,10 @@
 {% block heading %}
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">
-                Competition
-            </h1>
+            <div class="page-header">
+                <h1>{{competition.title}}</h1>
+                <h4>{{competition.description}}</h4>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -18,9 +19,14 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
-            <p>
-                Dit is een competitie pagina.
-            </p>
+HIER KOMEN DE RONDES
         </div>
     </div>
+    
+        <div class="row">
+        <div class="col-lg-12">
+HIER KOMEN DE TEAMS
+        </div>
+    </div>
+    
 {% endblock %}

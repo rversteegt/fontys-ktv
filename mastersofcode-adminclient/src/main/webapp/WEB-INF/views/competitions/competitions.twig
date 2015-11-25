@@ -9,6 +9,9 @@
         <div class="col-lg-12">
             <h1 class="page-header">
                 Wedstrijden
+                <a href="/mok/competitions/new" class="btn btn-default btn-header">
+                    Nieuwe wedstrijd
+                </a>
             </h1>
         </div>
     </div>
@@ -22,22 +25,26 @@
             {% if competitions is empty%}
                 <p> Er zijn nog geen competities </p>
             {% else %}
-                <table class="table table-header">
+                <table class="table-link" style="width:50%;">
+                    <thead>
                     <tr>
-                        <th>Titel</th>
-                        <th>Omschrijving</th>
+                        <th style="width:30%;">Titel</th>
+                        <th style="width:60%;">Omschrijving</th>
+                        <th style="width:5%;"></th>
+                        <th style="width:5%;"></th>
                     </tr>
-                </table>
-                {% for competition in competitions %}
-                    <table class="table"> 
+                    </thead>
+                    <tbody>
+                    {% for competition in competitions %}
                         <tr>
-                            <td><a href="test" class="table-link">{{competition.title}}</a></td>
-                            <td><a href="test" class="table-link">{{competition.description}}</a></td>
+                            <td><a href="/mok/competitions/{{competition.id}}">{{competition.title}}</a></td>
+                            <td><a href="/mok/competitions/{{competition.id}}">{{competition.description}}</a></td>
+                            <td><a href="#"><span class="fa fa-edit"></a></td>
+                            <td><a href="#"><span class="fa fa-minus-circle"></a></td>
                         </tr>
+                    {% endfor %}
+                    </tbody>
                 </table>
-                    </a>
-
-                {% endfor %}
             {% endif %}
         </div>
     </div>

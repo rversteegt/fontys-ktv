@@ -1,29 +1,35 @@
-.table-header{
-    margin: 0;
-}
 
-.table-header tr{
-    border-bottom: 2px solid #afafaf;
-    margin:0;
-}
-
-.table-header tr:hover{
-    border-bottom: 2px solid #afafaf;
+.btn-header{
+    float:right;
 }
 
 .table-link{
-    text-decoration: none;    
-    color: inherit;
-    margin:0;
-    padding:0;
-    display:block;
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width:100%;
 }
 
-.table-link:hover{
+.table-link th{
+    border-bottom: 2px solid #afafaf;
+}
+
+.table-link a{
+    margin: 0;
+    padding: 10px;
+    display: block;
     text-decoration: none;    
     color: inherit;
+}
+
+.table-link tbody tr{
+    border-bottom: 1px solid #cccccc
+}
+
+.table-link tbody tr:hover{
     background-color: #eeeeee;
 }
 
-.sessions-link{text-decoration:inherit;color:inherit;}
-.sessions-link:hover{text-decoration:inherit;color:inherit;}
+.table-link thead th{
+    padding: 10px;
+}

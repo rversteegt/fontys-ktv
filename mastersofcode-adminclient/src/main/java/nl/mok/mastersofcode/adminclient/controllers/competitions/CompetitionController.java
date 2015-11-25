@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import remote.ws.mok.domain.Assignment;
 import remote.ws.mok.domain.Competition;
+import remote.ws.mok.domain.Round;
 
 /**
  *
@@ -26,7 +28,7 @@ public class CompetitionController {
     public ModelAndView showDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
-        mav.addObject("competitions", getFakeData());
+        mav.addObject("competitions", getFakeCompetitions());
 
         mav.addObject("page", new Object() {
             public String uri = "/mok/competitions";
@@ -52,7 +54,7 @@ public class CompetitionController {
         return mav;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/competitions/new")
+    @RequestMapping(method = RequestMethod.POST, value = "/new")
     public ModelAndView addNewCompetition(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
@@ -70,6 +72,13 @@ public class CompetitionController {
     public ModelAndView testDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
+        Competition c = new Competition();
+        c.setTitle("De winkelwagen");
+        c.setDescription("Zorg voor een gebruikersvriendelijke en intuitieve winkelwagen");
+        
+        mav.addObject("competition", c);
+        mav.addObject("rounds", getFakeRounds());
+        
         mav.addObject("page", new Object() {
             public String uri = "/mok/competition";
             public String redirect = request.getRequestURL().toString();
@@ -80,7 +89,7 @@ public class CompetitionController {
         return mav;
     }
 
-    public List<Competition> getFakeData() {
+    public List<Competition> getFakeCompetitions() {
         List<Competition> competitions = new ArrayList<>();
 
         Competition c1 = new Competition();
@@ -98,4 +107,24 @@ public class CompetitionController {
         return competitions;
     }
 
+    public List<Round> getFakeRounds() {
+        List<Round> rounds = new ArrayList<>();
+
+        Round r = new Round();
+        Assignment a = new Assignment();
+        a.setName("Dit is de opdrachtnaam");
+        r.setId(1);
+        r.setDuration(3600);
+        r.setMultiplier(1);
+        rounds.add(r);
+        
+        a.setName("De winkelwagen");
+        r.setId(2);
+        r.setDuration(4655);
+        r.setMultiplier(3);
+        rounds.add(r);
+
+        return rounds;
+    }
+    
 }
