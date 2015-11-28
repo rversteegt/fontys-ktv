@@ -20,4 +20,9 @@ public class CompetitionService extends AuthenticatedSession {
                 new HttpEntity<>(null, credentials()), 
                 Competition[].class).getBody());
     }
+    
+    public static void add(Competition competition) {
+        template.exchange(endpoint, HttpMethod.POST,
+                new HttpEntity<>(competition, credentials()), String.class);                
+    }
 }

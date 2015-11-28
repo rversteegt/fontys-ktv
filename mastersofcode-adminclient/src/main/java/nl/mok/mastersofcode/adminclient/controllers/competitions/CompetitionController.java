@@ -31,8 +31,6 @@ public class CompetitionController {
         
         List<Competition> competitions = CompetitionService.all();
         
-        System.out.println(competitions);
-        
         mav.addObject("competitions", competitions);
         
         mav.setViewName("competitions/index.twig");
@@ -62,8 +60,22 @@ public class CompetitionController {
             public String uri = "/mok/competitions/new";
             public String redirect = request.getRequestURL().toString();
         });
-
-        mav.setViewName("competitions/competition_new.twig");
+        
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        
+        Competition competition = new Competition();
+        competition.setTitle(title);
+        competition.setDescription(description);
+        
+        System.out.println(competition.getTitle());
+        System.out.println(competition.getDescription());
+        
+        AuthenticatedSession.login("admin", "admin");
+        CompetitionService.add(competition);
+        
+                
+        mav.setViewName("competitions/index.twig");
         
         return mav;
     }
