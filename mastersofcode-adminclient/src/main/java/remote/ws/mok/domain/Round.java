@@ -17,7 +17,7 @@ public class Round {
     
     private int multiplier;
     
-    private Assignment assigment;
+    private Assignment assignment;
 
     public int getId() {
         return id;
@@ -51,12 +51,12 @@ public class Round {
         this.multiplier = multiplier;
     }
 
-    public Assignment getAssigment() {
-        return assigment;
+    public Assignment getAssignment() {
+        return assignment;
     }
 
-    public void setAssigment(Assignment assigment) {
-        this.assigment = assigment;
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
     }
     
     

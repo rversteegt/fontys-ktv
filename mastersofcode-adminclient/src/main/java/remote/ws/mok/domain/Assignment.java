@@ -9,8 +9,6 @@ import java.util.Set;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Assignment {
-
-    private String id;
     
     private String artifact;
     
@@ -27,14 +25,6 @@ public class Assignment {
     private String creatorLink;
     
     private Set<Hint> hints;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getArtifact() {
         return artifact;

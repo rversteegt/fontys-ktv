@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import remote.ws.mok.domain.Assignment;
 import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
+import remote.ws.mok.domain.Team;
 
 /**
  *
@@ -25,7 +26,7 @@ import remote.ws.mok.domain.Round;
 public class CompetitionController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showDashboard(final HttpServletRequest request) {
+    public ModelAndView showCompetitions(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
         mav.addObject("competitions", getFakeCompetitions());
@@ -69,7 +70,29 @@ public class CompetitionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ModelAndView testDashboard(final HttpServletRequest request) {
+    public ModelAndView showCompetition(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        Competition c = new Competition();
+        c.setTitle("De winkelwagen");
+        c.setDescription("Zorg voor een gebruikersvriendelijke en intuitieve winkelwagen");
+        
+        mav.addObject("competition", c);
+        mav.addObject("rounds", getFakeRounds());
+        mav.addObject("teams", getFakeTeams());
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competition";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("competitions/competition.twig");
+
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/addround")
+    public ModelAndView showAddRoundToCompetition(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
         Competition c = new Competition();
@@ -84,7 +107,70 @@ public class CompetitionController {
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("competitions/competition.twig");
+        mav.setViewName("competitions/competition_addround.twig");
+
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/addround")
+    public ModelAndView addRoundToCompetition(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        Competition c = new Competition();
+        c.setTitle("De winkelwagen");
+        c.setDescription("Zorg voor een gebruikersvriendelijke en intuitieve winkelwagen");
+        
+        mav.addObject("competition", c);
+        mav.addObject("rounds", getFakeRounds());
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competition";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("competitions/competition_addround.twig");
+
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/addteam")
+    public ModelAndView showAddTeamToCompetition(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        Competition c = new Competition();
+        c.setTitle("De winkelwagen");
+        c.setDescription("Zorg voor een gebruikersvriendelijke en intuitieve winkelwagen");
+        
+        mav.addObject("competition", c);
+        mav.addObject("teams", getFakeTeams());
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competition";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("competitions/competition_addteam.twig");
+
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/addteam")
+    public ModelAndView addTeamToCompetition(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        Competition c = new Competition();
+        c.setTitle("De winkelwagen");
+        c.setDescription("Zorg voor een gebruikersvriendelijke en intuitieve winkelwagen");
+        
+        mav.addObject("competition", c);
+        mav.addObject("teams", getFakeTeams());
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competition";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("competitions/competition_addteam.twig");
 
         return mav;
     }
@@ -116,15 +202,43 @@ public class CompetitionController {
         r.setId(1);
         r.setDuration(3600);
         r.setMultiplier(1);
+        r.setAssignment(a);
         rounds.add(r);
         
-        a.setName("De winkelwagen");
-        r.setId(2);
-        r.setDuration(4655);
-        r.setMultiplier(3);
-        rounds.add(r);
-
+        Round r2 = new Round();
+        Assignment a2 = new Assignment();
+        a2.setName("De winkelwagen");
+        r2.setId(2);
+        r2.setDuration(4655);
+        r2.setMultiplier(3);
+        r2.setAssignment(a2);
+        rounds.add(r2);
+        
         return rounds;
+    }
+    
+    public List<Team> getFakeTeams(){
+        List<Team> teams = new ArrayList<>();
+        
+        Team t = new Team();
+        t.setUsername("doc1");
+        t.setTeamname("De JavaDokters");
+        t.setFullname("Henk Westbroek");
+        teams.add(t);
+        
+        t = new Team();
+        t.setUsername("St@ck");
+        t.setTeamname("Stackers");
+        t.setFullname("Guus de Broek");
+        teams.add(t);
+        
+        t = new Team();
+        t.setUsername("Uno1");
+        t.setTeamname("Numero Uno");
+        t.setFullname("Willem Heijnen");
+        teams.add(t);
+        
+        return teams;
     }
     
 }

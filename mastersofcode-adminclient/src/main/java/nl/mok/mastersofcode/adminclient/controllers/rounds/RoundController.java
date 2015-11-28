@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.mok.mastersofcode.adminclient.controllers.teams;
+package nl.mok.mastersofcode.adminclient.controllers.rounds;
 
 import nl.mok.mastersofcode.adminclient.controllers.*;
 import javax.servlet.http.HttpServletRequest;
@@ -17,19 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Gijs
  */
 @Controller
-@RequestMapping("/members")
-public class MemberController {
+@RequestMapping("/round/{id}")
+public class RoundController {
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView testDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/members";
+            public String uri = "/mok/round";
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("teams/members.twig");
+        mav.setViewName("competitions/round.twig");
         
         return mav;
     }

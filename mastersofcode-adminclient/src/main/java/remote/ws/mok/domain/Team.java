@@ -6,7 +6,7 @@ import java.util.Set;
  *
  * @author Robert
  */
-class Team {
+public class Team {
     
     private String username;
     

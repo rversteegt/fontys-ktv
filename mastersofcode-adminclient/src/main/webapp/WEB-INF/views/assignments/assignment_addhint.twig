@@ -1,0 +1,37 @@
+{% extends "dashboard/index.twig" %}
+
+{% block title %}
+    Hint toevoegen
+{% endblock %}
+
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1>Hint toevoegen</h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4">
+            <form method="POST" action="/mok/assignments/{{artifact}}/addhint">    
+                <h3>
+                    Hint informatie
+                </h3>
+                <div class="form-group">
+                    <label>Hint tekst</label>
+                    <input name="text" class="form-control" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label>Tijd van vrijgeven in seconden</label>
+                    <input type="number" min=1 name="time" class="form-control" required autofocus>
+                </div>   
+                <button type="submit" class="btn btn-default">Hint toevoegen</button>
+            </form>  
+        </div>
+    </div>
+{% endblock %}
