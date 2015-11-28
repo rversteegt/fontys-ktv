@@ -1,27 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.mok.mastersofcode.adminclient.controllers.competitions;
 
-import nl.mok.mastersofcode.adminclient.controllers.*;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import remote.ws.mok.domain.Competition;
+import remote.ws.mok.endpoint.AuthenticatedSession;
+import remote.ws.mok.endpoint.CompetitionService;
 
 /**
  *
  * @author Gijs
  */
 @Controller
-@RequestMapping("/competition/{id}")
+@RequestMapping("/competitions")
 public class CompetitionController {
     
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView testDashboard(final HttpServletRequest request) {
+    public ModelAndView showCompetitions(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
@@ -29,7 +27,43 @@ public class CompetitionController {
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("competitions/competition.twig");
+        AuthenticatedSession.login("admin", "admin");
+        
+        List<Competition> competitions = CompetitionService.all();
+        
+        System.out.println(competitions);
+        
+        mav.addObject("competitions", competitions);
+        
+        mav.setViewName("competitions/index.twig");
+        
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/new")
+    public ModelAndView showNewCompetition(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competitions/new";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("competitions/competition_new.twig");
+        
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/new")
+    public ModelAndView addNewCompetition(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competitions/new";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("competitions/competition_new.twig");
         
         return mav;
     }
