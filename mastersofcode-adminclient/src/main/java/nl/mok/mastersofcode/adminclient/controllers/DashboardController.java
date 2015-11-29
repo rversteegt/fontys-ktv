@@ -11,10 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Gijs
  */
 @Controller
-@RequestMapping("/dashboard")
+@RequestMapping("/")
 public class DashboardController {
-    
     @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView home(final HttpServletRequest request) {
+        return showDashboard(request);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "dashboard")
     public ModelAndView showDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         

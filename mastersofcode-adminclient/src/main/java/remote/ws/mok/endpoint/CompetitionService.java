@@ -12,7 +12,7 @@ import remote.ws.mok.domain.Competition;
  * @author Robert
  */
 public class CompetitionService extends AuthenticatedSession {
-    private final static String endpoint = "http://localhost:8083/api/competitions";
+    private final static String endpoint = "http://localhost:8083/api/competitions/";
     private final static RestTemplate template = new RestTemplate();
     
     public static List<Competition> all() {
@@ -24,5 +24,16 @@ public class CompetitionService extends AuthenticatedSession {
     public static void add(Competition competition) {
         template.exchange(endpoint, HttpMethod.POST,
                 new HttpEntity<>(competition, credentials()), String.class);                
+    }
+    
+    public static void update(Competition competition) {
+        template.exchange(endpoint, HttpMethod.PUT,
+                new HttpEntity<>(competition, credentials()), String.class);                
+    }
+    
+    public static Competition byId(int id) {
+        return template.exchange(endpoint + id, HttpMethod.GET, 
+                new HttpEntity<>(null, credentials()), 
+                Competition.class).getBody();
     }
 }
