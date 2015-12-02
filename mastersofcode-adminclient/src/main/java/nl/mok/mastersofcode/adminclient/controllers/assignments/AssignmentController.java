@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.mok.mastersofcode.adminclient.controllers.assignments;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -154,8 +147,8 @@ public class AssignmentController {
         return ass;
     }
 
-    public Set<Hint> getFakeHints(){
-        Set<Hint> hints = new HashSet<>();
+    public List<Hint> getFakeHints(){
+        List<Hint> hints = new ArrayList<>();
         
         Hint hint = new Hint();
         hint.setAssignment("De webshop plugin");

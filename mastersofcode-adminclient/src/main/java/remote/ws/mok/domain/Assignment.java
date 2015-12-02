@@ -1,7 +1,7 @@
 package remote.ws.mok.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Set;
+import java.util.List;
 
 /**
  *
@@ -24,7 +24,7 @@ public class Assignment {
     
     private String creatorLink;
     
-    private Set<Hint> hints;
+    private List<Hint> hints;
 
     public String getArtifact() {
         return artifact;
@@ -82,11 +82,11 @@ public class Assignment {
         this.creatorLink = creatorLink;
     }
 
-    public Set<Hint> getHints() {
+    public List<Hint> getHints() {
         return hints;
     }
 
-    public void setHints(Set<Hint> hints) {
+    public void setHints(List<Hint> hints) {
         this.hints = hints;
     }
     

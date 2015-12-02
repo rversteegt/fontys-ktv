@@ -1,12 +1,12 @@
 package remote.ws.mok.domain;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  *
  * @author Robert
  */
-public class Team {
+public class User {
     
     private String username;
     
@@ -24,7 +24,7 @@ public class Team {
     
     private double totalscore;
     
-    private Set<Member> members;
+    private List<Member> members;
 
     public String getUsername() {
         return username;
@@ -90,11 +90,11 @@ public class Team {
         this.totalscore = totalscore;
     }
 
-    public Set<Member> getMembers() {
+    public List<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<Member> members) {
+    public void setMembers(List<Member> members) {
         this.members = members;
     }
     

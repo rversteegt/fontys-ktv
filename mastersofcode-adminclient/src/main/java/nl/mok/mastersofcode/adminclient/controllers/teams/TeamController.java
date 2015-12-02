@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.mok.mastersofcode.adminclient.controllers.teams;
 
 import java.util.ArrayList;
@@ -14,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import remote.ws.mok.domain.Member;
-import remote.ws.mok.domain.Team;
+import remote.ws.mok.domain.User;
 
 /**
  *
@@ -25,10 +20,10 @@ import remote.ws.mok.domain.Team;
 public class TeamController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showTeams(final HttpServletRequest request) {
+    public ModelAndView showUsers(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
-        mav.addObject("teams", getFakeTeams());
+        mav.addObject("teams", getFakeUsers());
 
         mav.addObject("page", new Object() {
             public String uri = "/mok/teams";
@@ -41,13 +36,13 @@ public class TeamController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{username}")
-    public ModelAndView showTeam(final HttpServletRequest request,
+    public ModelAndView showUser(final HttpServletRequest request,
             @PathVariable String username) {
         ModelAndView mav = new ModelAndView();
 
-        Team team = new Team();
+        User team = new User();
         team.setUsername(username);
-        team.setTeamname("De JavaDokters");
+        team.setUsername("De JavaDokters");
         mav.addObject("team", team);
         mav.addObject("members", getFakeMembers());
 
@@ -97,35 +92,35 @@ public class TeamController {
         return mav;
     }
 
-    public List<Team> getFakeTeams() {
-        List<Team> teams = new ArrayList<>();
+    public List<User> getFakeUsers() {
+        List<User> teams = new ArrayList<>();
 
-        Team t = new Team();
+        User t = new User();
         t.setUsername("bert");
         t.setEmail("bert@bert.nl");
         t.setFullname("Bert Jansen");
-        t.setTeamname("De JavaDokters");
+        t.setUsername("De JavaDokters");
         teams.add(t);
 
-        t = new Team();
+        t = new User();
         t.setUsername("jan");
         t.setEmail("jandevries@home.nl");
         t.setFullname("Jan de Vries");
-        t.setTeamname("Stackers");
+        t.setUsername("Stackers");
         teams.add(t);
 
-        t = new Team();
+        t = new User();
         t.setUsername("wim");
         t.setEmail("Wimmetje@hotmail.com");
         t.setFullname("Wim Krommetuin");
-        t.setTeamname("Numero Uno");
+        t.setUsername("Numero Uno");
         teams.add(t);
 
-        t = new Team();
+        t = new User();
         t.setUsername("jan123");
         t.setEmail("WieIsDit@ergens.nl");
         t.setFullname("Jan de Hoop");
-        t.setTeamname("Code4Ever");
+        t.setUsername("Code4Ever");
         teams.add(t);
 
         return teams;

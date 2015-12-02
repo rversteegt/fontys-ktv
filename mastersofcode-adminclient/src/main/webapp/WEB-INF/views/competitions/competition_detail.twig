@@ -1,0 +1,59 @@
+{% extends "dashboard/index.twig" %}
+
+{% block title %}
+    Competition
+{% endblock %}
+
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="post" action="/mok/competitions/update">
+                <h1 class="page-header">
+                    <input type="text" name="title" value="{{ competition.title }}"/>                    
+                </h1>
+                <p>
+                    <textarea name="description">{{ competition.description }}</textarea>
+                </p>
+                <input type="submit" value="Wijzig"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>
+                Rondes
+            </h1>
+            
+            {% for round in competition.rounds %}
+                <div class="competition-round">
+                    Ronde {{ loop.index + 1 }}
+                </div>
+            {% else %}
+                Geen rondes beschikbaar
+            {% endfor %}
+        </div>
+    </div>
+            
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>
+                Teams
+            </h1>
+            
+            {% for team in competition.teams %}
+                <div class="competition-round">
+                    {{ team.teamname }}
+                </div>
+            {% else %}
+                Geen teams beschikbaar
+            {% endfor %}
+            <a href="/mok/competitions/{{ competition.id }}/add-teams">
+                Voeg teams toe...
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,6 +1,7 @@
 package remote.ws.mok.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,9 +17,9 @@ public class Competition {
 
     private String description;
 
-    private Set<Team> teams;
+    private List<User> teams;
 
-    private Set<Round> rounds;
+    private List<Round> rounds;
 
     public int getId() {
         return id;
@@ -44,19 +45,19 @@ public class Competition {
         this.description = description;
     }
 
-    public Set<Team> getTeams() {
+    public List<User> getTeams() {
         return teams;
     }
 
-    public void setTeams(Set<Team> teams) {
+    public void setTeams(List<User> teams) {
         this.teams = teams;
     }
 
-    public Set<Round> getRounds() {
+    public List<Round> getRounds() {
         return rounds;
     }
 
-    public void setRounds(Set<Round> rounds) {
+    public void setRounds(List<Round> rounds) {
         this.rounds = rounds;
     }
 

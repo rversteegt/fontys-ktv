@@ -1,4 +1,4 @@
-package nl.mok.mastersofcode.adminclient.controllers;
+package nl.mok.mastersofcode.adminclient.controllers.teams;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -11,24 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Gijs
  */
 @Controller
-@RequestMapping("/")
-public class DashboardController {
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView home(final HttpServletRequest request) {
-        return showDashboard(request);
-    }
+@RequestMapping("/members")
+public class MemberController {
     
-    @RequestMapping(method = RequestMethod.GET, value = "dashboard")
-    public ModelAndView showDashboard(final HttpServletRequest request) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView testDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/";
+            public String uri = "/mok/members";
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("dashboard/index.twig");
+        mav.setViewName("teams/members.twig");
         
         return mav;
     }
+
 }
