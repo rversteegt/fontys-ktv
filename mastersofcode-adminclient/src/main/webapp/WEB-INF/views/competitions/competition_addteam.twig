@@ -32,7 +32,7 @@
                 {% if teams is empty%}
                     <p> Er zijn geen teams om toe te voegen </p>                    
                 {% else %}
-                    <form method="POST" action="/mok/competitions/{{competition.id}}/addteam">
+                    <form method="POST">
                         <table class="table"  style="width:50%;">
                             <thead>
                             <th style="width:10%;"></th>
@@ -45,7 +45,7 @@
                                 {% for team in teams %}
 
                                     <tr>
-                                        <td><input type="radio" name="round" value="{{team.username}}"></td>
+                                        <td><input type="radio" name="team" value="{{team.username}}"></td>
                                         <td>{{team.teamname}}</td>
                                         <td>{{team.fullname}}</td>
                                     </tr>

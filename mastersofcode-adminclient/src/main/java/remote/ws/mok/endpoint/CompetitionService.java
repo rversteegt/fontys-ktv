@@ -28,16 +28,6 @@ public class CompetitionService extends AuthenticatedSession {
     }
 
     public static void add(Competition competition) {
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-
-            System.out.println("test: " + mapper.writeValueAsString(competition));
-            System.out.println("testhead: " + mapper.writeValueAsString(credentials()));
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(RoundService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         template.exchange(endpoint, HttpMethod.POST,
                 new HttpEntity<>(competition, credentials()), String.class);
     }

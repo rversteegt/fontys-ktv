@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import remote.ws.mok.domain.Assignment;
 import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
+import remote.ws.mok.domain.User;
 import remote.ws.mok.endpoint.AssignmentService;
 import remote.ws.mok.endpoint.AuthenticatedSession;
 import remote.ws.mok.endpoint.CompetitionService;
@@ -111,7 +112,7 @@ public class CompetitionController {
 
         List<Assignment> assignments = AssignmentService.all();
         mav.addObject("assignments", assignments);
-        
+
         Competition competition = CompetitionService.byId(id);
         mav.addObject("competition", competition);
 
@@ -129,23 +130,65 @@ public class CompetitionController {
             public String uri = "/mok/competitions/" + id;
             public String redirect = request.getRequestURL().toString();
         });
-        
+
         Assignment assignment = AssignmentService
                 .byId(request.getParameter("assignment"));
-        
+
         Optional<Round> round = RoundHelper
                 .createRound(request, null, assignment, id);
-        
-        if(round.isPresent()){
+
+        if (round.isPresent()) {
             AuthenticatedSession.login("admin", "admin");
             RoundService.add(round.get());
         }
-       
+
         mav.setViewName("redirect:/mok/competitions/" + id);
 
         return mav;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/addteam")
+    public ModelAndView showAddTeams(@PathVariable("id") int competitionId,
+            final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competitions/" + competitionId + "/addteam";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        AuthenticatedSession.login("admin", "admin");
+        mav.addObject("teams", UserService.allOfRole("team"));
+
+        mav.setViewName("competitions/competition_addteam.twig");
+
+        return mav;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/addteam")
+    public ModelAndView addTeams(@PathVariable("id") int competitionId,
+            final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/competitions/" + competitionId;
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        AuthenticatedSession.login("admin", "admin");
+        
+        Competition competition = CompetitionHelper.addUser(
+                CompetitionService.byId(competitionId),
+                UserService.byId(request.getParameter("team")));
+        
+        CompetitionService.update(competition);
+        
+        mav.setViewName("redirect:/mok/competitions/" + competitionId);
+
+        return mav;
+    }
+
+    //OUD
     @RequestMapping(method = RequestMethod.POST, value = "/update")
     public ModelAndView updateCompetition(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
@@ -170,31 +213,4 @@ public class CompetitionController {
         return mav;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}/addteam")
-    public ModelAndView showAddTeams(@PathVariable("id") int id,
-            final HttpServletRequest request) {
-        ModelAndView mav = showCompetitionDetail(id, request);
-
-        //add competitions + rename teams to users in twig
-        //competition_addteam.twig
-        mav.addObject("users", UserService.all());
-
-        mav.setViewName("competitions/competition_addteam.twig");
-
-        return mav;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/{id}/addteam")
-    public ModelAndView addTeams(@PathVariable("id") int id,
-            final HttpServletRequest request) {
-        ModelAndView mav = showCompetitionDetail(id, request);
-
-        request.getParameter("team_id");
-
-        mav.addObject("users", UserService.all());
-
-        mav.setViewName("competitions/competition_addteam.twig");
-
-        return mav;
-    }
 }

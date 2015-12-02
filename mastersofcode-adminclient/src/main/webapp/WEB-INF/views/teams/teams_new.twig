@@ -1,0 +1,53 @@
+{% extends "dashboard/index.twig" %}
+
+{% block title %}
+    Team
+{% endblock %}
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Team
+            </h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4">
+            <form method="POST">    
+                <h3>
+                    Inloggegevens
+                </h3>
+                <div class="form-group">
+                    <label>Gebruikersnaam</label>
+                    <input name="username" class="form-control" required autofocus 
+                           pattern=^[a-z0-9]*$" title="kleine letters en minimaal 1 cijfer">
+                </div>
+                <div class="form-group">
+                    <label>Wachtwoord</label>
+                    <input name="password" class="form-control" required autofocus type="password">
+                </div>   
+                <h3>
+                    Team informatie
+                </h3>
+                <div class="form-group">
+                    <label>Volledige naam teamleider</label>
+                    <input name="fullname" class="form-control" required autofocus>
+                </div> 
+                <div class="form-group">
+                    <label>Teamnaam</label>
+                    <input name="teamname" class="form-control" required autofocus>
+                </div> 
+                <div class="form-group">
+                    <label>Email teamleider</label>
+                    <input name="email" class="form-control" required autofocus type="email">
+                </div> 
+                <input name="role" value="team" type="hidden">
+                <button type="submit" class="btn btn-default">Aanmaken</button>
+            </form>  
+        </div>
+    </div>
+{% endblock %}

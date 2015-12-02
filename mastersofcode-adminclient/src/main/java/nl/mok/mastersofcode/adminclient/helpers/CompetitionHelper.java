@@ -6,8 +6,11 @@
 package nl.mok.mastersofcode.adminclient.helpers;
 
 import java.util.Optional;
+import static java.util.stream.Collectors.toList;
+import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import remote.ws.mok.domain.Competition;
+import remote.ws.mok.domain.User;
 
 /**
  *
@@ -43,6 +46,16 @@ public class CompetitionHelper {
             return Optional.of(comp);
         }
         
+    }
+    
+    public static Competition addUser(Competition competition, User user) {
+
+        competition.setTeams(
+                Stream.concat(competition.getTeams().stream(), 
+                        Stream.of(user)).collect(toList())
+        );
+
+        return competition;
     }
     
 }

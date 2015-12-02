@@ -19,7 +19,7 @@ import remote.ws.mok.domain.Round;
  */
 public class RoundService extends AuthenticatedSession {
 
-    private final static String endpoint = "http://localhost:8083/api/rounds";
+    private final static String endpoint = "http://localhost:8083/api/rounds/";
     private final static RestTemplate template = new RestTemplate();
 
     public static List<Round> all() {

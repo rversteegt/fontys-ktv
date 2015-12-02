@@ -1,19 +1,19 @@
 package nl.mok.mastersofcode.adminclient.controllers.assignments;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import nl.mok.mastersofcode.adminclient.helpers.AssignmentHelper;
+import nl.mok.mastersofcode.adminclient.helpers.HintHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import remote.ws.mok.domain.Assignment;
-import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Hint;
 import remote.ws.mok.endpoint.AssignmentService;
 import remote.ws.mok.endpoint.AuthenticatedSession;
-import remote.ws.mok.endpoint.CompetitionService;
 
 /**
  *
@@ -63,26 +63,27 @@ public class AssignmentController {
             public String uri = "/mok/assignments/new";
             public String redirect = request.getRequestURL().toString();
         });
+        
+        Optional<Assignment> assignmentOpt = AssignmentHelper
+                .createAssignment(request, null);
+        
+        if(assignmentOpt.isPresent()){
+            AuthenticatedSession.login("admin", "admin");
+            AssignmentService.add(assignmentOpt.get());
+        }
 
-        mav.setViewName("assignments/assignments_new.twig");
+        mav.setViewName("redirect:/mok/assignments");
         
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.GET, value="/{artifact}")
+    @RequestMapping(method = RequestMethod.GET, value="/{artifact:.+}")
     public ModelAndView showAssignment(final HttpServletRequest request,
             @PathVariable String artifact) {
         ModelAndView mav = new ModelAndView();
         
-        Assignment assignment = new Assignment();
-        assignment.setArtifact(artifact);
-        assignment.setName("De webshop plugin");
-        assignment.setParticipantDescription("Bouw een aanvullende module op een bestaande webshop");
-        assignment.setSpectatorDescription("Deelnemers bouwen een webshop");
-        assignment.setCreatorName("Bert Jansen");
-        assignment.setCreatorOrganisation("Jansen BV");
-        assignment.setCreatorLink("http://www.jansenbv.nl");
-        mav.addObject("assignment", assignment);
+        AuthenticatedSession.login("admin", "admin");
+        mav.addObject("assignment", AssignmentService.byId(artifact));
         
         mav.addObject("page", new Object() {
             public String uri = "/mok/assignment";
@@ -99,7 +100,7 @@ public class AssignmentController {
             @PathVariable String artifact) {
         ModelAndView mav = new ModelAndView();
         
-        mav.addObject("artifact", artifact);
+        mav.addObject("assignment", artifact);
         
         mav.addObject("page", new Object() {
             public String uri = "/mok/assignment";
@@ -116,14 +117,23 @@ public class AssignmentController {
             @PathVariable String artifact) {
         ModelAndView mav = new ModelAndView();
         
-        mav.addObject("artifact", artifact);
-        
         mav.addObject("page", new Object() {
             public String uri = "/mok/assignment";
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("assignments/assignment_addhint.twig");
+        Optional<Hint> hintOpt = HintHelper.createHint(request, null);
+        
+        if(hintOpt.isPresent()){
+            AuthenticatedSession.login("admin", "admin");
+            Assignment assignment = AssignmentHelper.addHint(
+                    AssignmentService.byId(artifact),
+                    hintOpt.get()
+            );
+            AssignmentService.update(assignment);
+        }
+        
+        mav.setViewName("redirect:/mok/assignments/" + artifact);
         
         return mav;
     }
