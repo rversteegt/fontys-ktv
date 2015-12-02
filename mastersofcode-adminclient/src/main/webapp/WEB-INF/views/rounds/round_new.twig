@@ -1,15 +1,14 @@
 {% extends "dashboard/index.twig" %}
 
 {% block title %}
-    Nieuwe ronde
+    Ronde
 {% endblock %}
-
 
 {% block heading %}
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Nieuwe ronde
+                Ronde
             </h1>
         </div>
     </div>
@@ -17,10 +16,33 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-12">
-            <p>
-                NIEUWE RONDE AANMAKEN
-            </p>
+        <div class="col-lg-4">
+            <form method="POST" action="/mok/rounds/new">    
+                <h3>
+                    Ronde informatie
+                </h3>
+
+                <div class="form-group">
+                    <input name="competition" class="form-control" value="0" type="hidden">
+                </div>
+                <div class="form-group">
+                    <label>Duratie in seconden</label>
+                    <input name="duration" class="form-control" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label>Moeilijkheidsgraad</label>
+                    <input name="multiplier" class="form-control" required autofocus>
+                </div>   
+                <div class="form-group">
+                    <label>Opdracht</label>
+                    <select name="assignment"  class="form-control">
+                        {%for assignment in assignments%}
+                            <option value="{{assignment.artifact}}">{{assignment.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>    
+                <button type="submit" class="btn btn-default">Aanmaken</button>
+            </form>  
         </div>
     </div>
 {% endblock %}

@@ -32,7 +32,7 @@
             <div class="container">
                 <p class="error">            
                 </p>
-                {% if rounds is empty%}
+                {% if competition.rounds is empty%}
                     <p> Er zijn nog geen rondes </p>
                 {% else %}
                     <table class="table-link" style="width:50%;">
@@ -46,7 +46,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for round in rounds %}
+                            {% for round in competition.rounds %}
                                 <tr>
                                     <td><a href="/mok/rounds/{{round.id}}">{{round.assignment.name}}</a></td>
                                     <td><a href="/mok/rounds/{{round.id}}">{{round.multiplier}}</a></td>
@@ -77,7 +77,7 @@
             <div class="container">
                 <p class="error">            
                 </p>
-                {% if teams is empty%}
+                {% if competition.teams is empty%}
                     <p> Er zijn nog geen teams </p>
                 {% else %}
                     <table class="table-link" style="width:50%;">
@@ -90,7 +90,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for team in teams %}
+                            {% for team in competition.teams %}
                                 <tr>
                                     <td><a href="/mok/teams/{{team.id}}">{{team.teamname}}</a></td>
                                     <td><a href="/mok/teams/{{team.id}}">{{team.fullname}}</a></td>

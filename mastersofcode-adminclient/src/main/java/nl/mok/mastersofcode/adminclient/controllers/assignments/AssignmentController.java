@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import remote.ws.mok.domain.Assignment;
+import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Hint;
+import remote.ws.mok.endpoint.AssignmentService;
+import remote.ws.mok.endpoint.AuthenticatedSession;
+import remote.ws.mok.endpoint.CompetitionService;
 
 /**
  *
@@ -23,12 +27,14 @@ public class AssignmentController {
     public ModelAndView showAssignments(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         
-        mav.addObject("assignments", getFakeAssignments());
-        
         mav.addObject("page", new Object() {
             public String uri = "/mok/assignments";
             public String redirect = request.getRequestURL().toString();
         });
+        
+        AuthenticatedSession.login("admin", "admin");
+        List<Assignment> assignments = AssignmentService.all();
+        mav.addObject("assignments", assignments);
 
         mav.setViewName("assignments/assignments.twig");
         
@@ -76,7 +82,6 @@ public class AssignmentController {
         assignment.setCreatorName("Bert Jansen");
         assignment.setCreatorOrganisation("Jansen BV");
         assignment.setCreatorLink("http://www.jansenbv.nl");
-        assignment.setHints(getFakeHints());
         mav.addObject("assignment", assignment);
         
         mav.addObject("page", new Object() {
@@ -121,50 +126,6 @@ public class AssignmentController {
         mav.setViewName("assignments/assignment_addhint.twig");
         
         return mav;
-    }
-    
-    
-    
-    public List<Assignment> getFakeAssignments(){
-        List<Assignment> ass = new ArrayList<>();
-        
-        Assignment a = new Assignment();
-        a.setArtifact("Artifact1.zip");
-        a.setName("De webshop plugin");
-        a.setParticipantDescription("Bouw een aanvullende module op een bestaande webshop");
-        a.setSpectatorDescription("Deelnemers bouwen een webshop");
-        a.setHints(getFakeHints());
-        ass.add(a);
-        
-        a = new Assignment();
-        a.setArtifact("Artifact2.jar");
-        a.setName("Het patienten dossier");
-        a.setParticipantDescription("Zorg voor een opbouw van patientengegevens in een overzichtelijk dashboard");
-        a.setSpectatorDescription("Deelnemers bouwen elektronisch patientendossier");
-        a.setHints(getFakeHints());
-        ass.add(a);
-        
-        return ass;
-    }
-
-    public List<Hint> getFakeHints(){
-        List<Hint> hints = new ArrayList<>();
-        
-        Hint hint = new Hint();
-        hint.setAssignment("De webshop plugin");
-        hint.setId(1);
-        hint.setText("Extra punten voor een interactieve winkelwagen");
-        hint.setTime(1200);
-        hints.add(hint);
-        
-        hint = new Hint();
-        hint.setAssignment("De webshop plugin");
-        hint.setId(3);
-        hint.setText("Betalingen hoeven niet via een https verbinding");
-        hint.setTime(2400);
-        hints.add(hint);
-        
-        return hints;
     }
     
 }
