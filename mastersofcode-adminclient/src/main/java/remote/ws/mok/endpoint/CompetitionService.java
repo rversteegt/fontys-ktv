@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import remote.ws.mok.domain.Competition;
 import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
@@ -33,8 +34,12 @@ public class CompetitionService extends AuthenticatedSession {
     }
 
     public static void update(Competition competition) {
+        try{
         template.exchange(endpoint, HttpMethod.PUT,
                 new HttpEntity<>(competition, credentials()), String.class);
+        } catch (HttpClientErrorException ex){
+            System.out.println(ex.getResponseBodyAsString());
+        }
     }
 
     public static Competition byId(int id) {

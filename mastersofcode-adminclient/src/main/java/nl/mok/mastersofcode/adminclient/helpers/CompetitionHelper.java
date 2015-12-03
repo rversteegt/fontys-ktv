@@ -22,12 +22,11 @@ public class CompetitionHelper {
      * Creates a Competition object from a request, returns null if correct
      * parameters not present or empty
      * 
-     * @param request 
-     * @param id id of competition to be updated or NULL if new competition
+     * @param request
      * @return 
      */
     public static Optional<Competition> createCompetition(
-        HttpServletRequest request, Integer id){
+        HttpServletRequest request){
         
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -38,12 +37,30 @@ public class CompetitionHelper {
             Competition comp = new Competition();
             comp.setTitle(title);
             comp.setDescription(description);
-            
-            if(id!=null){
-                comp.setId(id);
-            }
-            
             return Optional.of(comp);
+        }
+        
+    }
+    
+    /**
+     * updates a competition with new values placed in the request
+     * 
+     * @param request
+     * @param competition competition to be updated
+     * @return updated competition
+     */
+    public static Optional<Competition> updateCompetition(
+        HttpServletRequest request, Competition competition){
+        
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        
+        if(title == null || title.isEmpty() || description == null || description.isEmpty()){
+            return Optional.empty();
+        } else {
+            competition.setTitle(title);
+            competition.setDescription(description);
+            return Optional.of(competition);
         }
         
     }

@@ -51,7 +51,7 @@
                                     <td>{{round.assignment.name}}</td>
                                     <td>{{round.multiplier}}</td>
                                     <td>{{round.duration}}</td>
-                                    <td><a href="#"><span class="fa fa-edit"></a></td>
+                                    <td><a href="/mok/competitions/{{competition.id}}/{{round.id}}/update"><span class="fa fa-edit"></a></td>
                                     <td><a href="#"><span class="fa fa-minus-circle"></a></td>
                                 </tr>
                             {% endfor %}
@@ -83,9 +83,8 @@
                     <table class="table-link" style="width:50%;">
                         <thead>
                             <tr>
-                                <th style="width:45%;">Teamnaam</th>
+                                <th style="width:50%;">Teamnaam</th>
                                 <th style="width:45%;">Team leider</th>
-                                <th style="width:5%;"></th>
                                 <th style="width:5%;"></th>
                             </tr>
                         </thead>
@@ -94,7 +93,6 @@
                                 <tr>
                                     <td><a href="/mok/teams/{{team.username}}">{{team.teamname}}</a></td>
                                     <td><a href="/mok/teams/{{team.username}}">{{team.fullname}}</a></td>
-                                    <td><a href="#"><span class="fa fa-edit"></a></td>
                                     <td><a href="#"><span class="fa fa-minus-circle"></a></td>
                                 </tr>
                             {% endfor %}

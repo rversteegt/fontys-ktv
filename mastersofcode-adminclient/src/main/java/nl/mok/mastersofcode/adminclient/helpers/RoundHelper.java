@@ -8,6 +8,7 @@ package nl.mok.mastersofcode.adminclient.helpers;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import remote.ws.mok.domain.Assignment;
+import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
 
 /**
@@ -21,14 +22,13 @@ public class RoundHelper {
      * parameters not present or empty
      * 
      * @param request 
-     * @param id id of round to be updated or NULL if new competition
      * @param assignment assignment of round
-     * @param competitionId Id of linked competition or NULL if no competition linked
+     * @param competitionId Id of linked competition
      * @return 
      */
     public static Optional<Round> createRound(
-        HttpServletRequest request, Integer id, 
-            Assignment assignment, Integer competitionId){
+        HttpServletRequest request, Assignment assignment, 
+            Integer competitionId){
         
         Integer duration = Parser.parseInt(request.getParameter("duration"))
                 .orElse(null);
@@ -43,12 +43,35 @@ public class RoundHelper {
             round.setDuration(duration);
             round.setMultiplier(multiplier);
             round.setCompetition(competitionId);
-            if(id!=null){
-                round.setId(id);
-            }
-            
             return Optional.of(round);
         } 
+    }
+    
+        /**
+     * updates a round with new values placed in the request
+     * 
+     * @param request
+     * @param assignment to be added to round
+     * @param round round to be updated
+     * @return updated round
+     */
+    public static Optional<Round> updateRound(
+        HttpServletRequest request, Assignment assignment, Round round){
+        
+        Integer duration = Parser.parseInt(request.getParameter("duration"))
+                .orElse(null);
+        Integer multiplier = Parser.parseInt(request.getParameter("multiplier"))
+                .orElse(null);
+        
+        if(duration == null || multiplier == null){
+            return Optional.empty();
+        } else {
+            round.setAssignment(assignment);
+            round.setDuration(duration);
+            round.setMultiplier(multiplier);
+            return Optional.of(round);
+        } 
+        
     }
     
 }
