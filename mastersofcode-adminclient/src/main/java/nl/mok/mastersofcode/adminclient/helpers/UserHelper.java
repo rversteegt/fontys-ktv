@@ -23,15 +23,12 @@ public class UserHelper {
      * not present or empty
      *
      * @param request
-     * @param currentUserName username of user to be updated or NULL if new user
      * @return
      */
     public static Optional<User> createUser(
-            HttpServletRequest request, String currentUserName) {
+            HttpServletRequest request) {
 
-        String username = currentUserName == null
-                ? request.getParameter("username")
-                : currentUserName;
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullname = request.getParameter("fullname");
         String teamname = request.getParameter("teamname");

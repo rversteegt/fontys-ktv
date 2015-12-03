@@ -23,14 +23,12 @@ public class AssignmentHelper {
      * parameters not present or empty
      *
      * @param request
-     * @param currentArtifact artifact of assignment to be updated or NULL if
-     * new assignment
      * @return
      */
     public static Optional<Assignment> createAssignment(
-            HttpServletRequest request, String currentArtifact) {
+            HttpServletRequest request) {
 
-        String artifact = currentArtifact == null ? request.getParameter("artifact") : currentArtifact;
+        String artifact = request.getParameter("artifact");
         String name = request.getParameter("name");
         String participantDescription = request.getParameter("participantDescription");
         String spectatorDescription = request.getParameter("spectatorDescription");

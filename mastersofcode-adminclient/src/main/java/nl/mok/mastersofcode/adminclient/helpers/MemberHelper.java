@@ -22,12 +22,11 @@ public class MemberHelper {
      * parameters not present or empty
      *
      * @param request
-     * @param id id of member to be updated or null if new member
      * @param team Id of linked team, can't be null
      * @return
      */
     public static Optional<Member> createMember(
-            HttpServletRequest request, Integer id, String team) {
+            HttpServletRequest request, String team) {
 
         String membername = request.getParameter("membername");
         String email = request.getParameter("email");
@@ -40,9 +39,6 @@ public class MemberHelper {
                 member.setMembername(membername);
                 member.setEmail(email);
                 member.setTeam(team);
-                if (id != null) {
-                    member.setId(id);
-                }
                 memberOpt = Optional.of(member);
             }
         } catch (NullPointerException ex) {

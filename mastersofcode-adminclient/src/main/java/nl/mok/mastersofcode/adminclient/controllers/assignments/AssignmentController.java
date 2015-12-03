@@ -57,24 +57,16 @@ public class AssignmentController {
     
     @RequestMapping(method = RequestMethod.POST, value="/new")
     public ModelAndView addNewAssignment(final HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
-        
-        mav.addObject("page", new Object() {
-            public String uri = "/mok/assignments/new";
-            public String redirect = request.getRequestURL().toString();
-        });
         
         Optional<Assignment> assignmentOpt = AssignmentHelper
-                .createAssignment(request, null);
+                .createAssignment(request);
         
         if(assignmentOpt.isPresent()){
             AuthenticatedSession.login("admin", "admin");
             AssignmentService.add(assignmentOpt.get());
         }
 
-        mav.setViewName("redirect:/mok/assignments");
-        
-        return mav;
+        return new ModelAndView("redirect:/mok/assignments");
     }
     
     @RequestMapping(method = RequestMethod.GET, value="/{artifact:.+}")
@@ -115,14 +107,8 @@ public class AssignmentController {
     @RequestMapping(method = RequestMethod.POST, value="/{artifact}/addhint")
     public ModelAndView addHint(final HttpServletRequest request,
             @PathVariable String artifact) {
-        ModelAndView mav = new ModelAndView();
         
-        mav.addObject("page", new Object() {
-            public String uri = "/mok/assignment";
-            public String redirect = request.getRequestURL().toString();
-        });
-
-        Optional<Hint> hintOpt = HintHelper.createHint(request, null);
+        Optional<Hint> hintOpt = HintHelper.createHint(request);
         
         if(hintOpt.isPresent()){
             AuthenticatedSession.login("admin", "admin");
@@ -133,9 +119,7 @@ public class AssignmentController {
             AssignmentService.update(assignment);
         }
         
-        mav.setViewName("redirect:/mok/assignments/" + artifact);
-        
-        return mav;
+        return new ModelAndView("redirect:/mok/assignments/" + artifact);
     }
     
 }

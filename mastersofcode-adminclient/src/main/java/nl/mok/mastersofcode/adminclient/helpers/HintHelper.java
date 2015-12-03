@@ -23,11 +23,10 @@ public class HintHelper {
      * not present or empty
      *
      * @param request
-     * @param id id of hint to be updated or null if new hint
      * @return
      */
     public static Optional<Hint> createHint(
-            HttpServletRequest request, Integer id) {
+            HttpServletRequest request) {
 
         String text = request.getParameter("text");
         String assignment = request.getParameter("assignment");
@@ -41,9 +40,6 @@ public class HintHelper {
                 hint.setAssignment(assignment);
                 hint.setText(text);
                 hint.setTime(time);
-                if(id!=null){
-                    hint.setId(id);
-                }
                 hintOpt = Optional.of(hint);
             }
         } catch (NullPointerException ex) {

@@ -58,23 +58,15 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/new")
     public ModelAndView addUser(final HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
 
-        mav.addObject("page", new Object() {
-            public String uri = "/mok/teams/new";
-            public String redirect = request.getRequestURL().toString();
-        });
-
-        Optional<User> user = UserHelper.createUser(request, null);
+        Optional<User> user = UserHelper.createUser(request);
 
         if (user.isPresent()) {
             AuthenticatedSession.login("admin", "admin");
             UserService.add(user.get());
         }
 
-        mav.setViewName("redirect:/mok/teams");
-
-        return mav;
+        return new ModelAndView("redirect:/mok/teams");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{username}")
@@ -113,15 +105,9 @@ public class TeamController {
     @RequestMapping(method = RequestMethod.POST, value = "/{username}/addmember")
     public ModelAndView addMember(final HttpServletRequest request,
             @PathVariable String username) {
-        ModelAndView mav = new ModelAndView();
-
-        mav.addObject("page", new Object() {
-            public String uri = "/mok/teams/" + username + "/addmember";
-            public String redirect = request.getRequestURL().toString();
-        });
 
         Optional<Member> member = MemberHelper
-                .createMember(request, null, username);
+                .createMember(request, username);
 
         if (member.isPresent()) {
             AuthenticatedSession.login("admin", "admin");
@@ -129,9 +115,7 @@ public class TeamController {
             UserService.update(user);
         }
 
-        mav.setViewName("redirect:/mok/teams/" + username);
-
-        return mav;
+        return new ModelAndView("redirect:/mok/teams/" + username);
     }
 
 }
