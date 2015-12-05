@@ -24,7 +24,7 @@ public class TeamController {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/team";
+            public String uri = "/spec/team";
             public String redirect = request.getRequestURL().toString();
         });
 

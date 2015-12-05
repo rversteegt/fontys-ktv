@@ -24,7 +24,7 @@ public class RoundController {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/round";
+            public String uri = "/spec/round";
             public String redirect = request.getRequestURL().toString();
         });
 

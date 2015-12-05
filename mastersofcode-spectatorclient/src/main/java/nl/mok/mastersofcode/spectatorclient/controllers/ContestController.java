@@ -24,7 +24,7 @@ public class ContestController {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/contest";
+            public String uri = "/spec/contest";
             public String redirect = request.getRequestURL().toString();
         });
 

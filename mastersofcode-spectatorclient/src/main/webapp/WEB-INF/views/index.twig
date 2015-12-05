@@ -12,16 +12,16 @@
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-    
+
     <!--Custom added CSS-->
-    <link href="/assets/common/css/default.css" rel="stylesheet"/>
+    <link href="/assets/common/css/spectator.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/assets/common/fancybox/jquery.fancybox.css" type="text/css" media="screen" /> 
-    
+
 {% endblock %}
 
 {% block more_js %}
     <script type="text/javascript" src="/assets/common/fancybox/jquery.fancybox.pack.js"></script>
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".fancybox").fancybox();
@@ -30,88 +30,101 @@
 {% endblock %}
 
 {% block body %}
-    
+
     {% block brand %}
-    <div class="brand">Masters Of Java</div>
+        <div class="brand">Masters Of Java</div>
     {% endblock %}
-    
+
     {%block navigation %}
-    <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="overzicht">Overzicht</a>
-                    </li>
-                    <li>
-                        <a href="contest?id=2">Actuele wedstrijd</a>
-                    </li>
-                    <li>
-                        <a href="round?id=3">Actuele ronde</a>
-                    </li>
-                </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/spec/">Overzicht</a>
+                        </li>
+                        <li>
+                            <a href="/spec/competition/{{currentCompetition.id}}">Actuele wedstrijd</a>
+                        </li>
+                        <li>
+                            <a href="/spec/round/{{currentRound.id}}">Actuele ronde</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+            <!-- /.container -->
+        </nav>
     {% endblock %}
-    
+
     {% block content %}
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12 text-center">
-                    <h2 class="brand-before">
-                        <small>Welkom bij</small>
-                    </h2>
-                    <h1 class="brand-name">Masters Of Java</h1>
-                    <hr class="tagline-divider">
-                    <h2>
-                        <small>
-                            <strong>Funprogging wedstrijd - 2015</strong>
-                        </small>
-                    </h2>
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="brand-before">
+                            <small>Welkom bij</small>
+                        </h2>
+                        <h1 class="brand-name">Masters Of Java</h1>
+                        <hr class="tagline-divider">
+                        <h2>
+                            <small>
+                                <strong>Funprogging wedstrijd - 2015</strong>
+                            </small>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            <strong>Actuele wedstrijden</strong>
+                        </h2>
+                        <hr>
+                        {% if competitions is empty%}
+                            <p> Er zijn nog geen competities </p>
+                        {% else %}
+                            <table class="table-link table-centered" align="center" style="width:70%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:30%;">Titel</th>
+                                        <th style="width:60%;">Omschrijving</th>
+                                        <th style="width:10%;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for competition in competitions %}
+                                        <tr>
+                                            <td><a href="/mok/competitions/{{competition.id}}">{{competition.title}}</a></td>
+                                            <td><a href="/mok/competitions/{{competition.id}}">{{competition.description}}</a></td>
+                                            <td><a href="/mok/competitions/{{competition.id}}"></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">
-                        <strong>Actuele wedstrijden</strong>
-                    </h2>
-                    <hr>
-                    <p>Hier komt nog een lijst van alle wedstrijden. Klik op een
-                       wedstrijd om meer gegevens te bekijken.
-                    </p>
-                    <ul>
-                        <li><a href="contest?id=1">Wedstrijd "Iets" - gepland 02-12-2015</a></li>
-                        <li><a href="contest?id=2">Wedstrijd "tja" - bezig...</a></li>
-                        <li><a href="contest?id=3">Blablabla</a></li>
-                    </ul>      
-                </div>
-            </div>
-        </div>
-
-    </div>
     {% endblock %}
 
     {% block footer %}
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; MOK</p>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p>Copyright &copy; MOK</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
     {% endblock %}
 
 {% endblock %}
