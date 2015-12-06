@@ -37,7 +37,7 @@ public class RoundService extends AuthenticatedSession {
     }
 
     public static Round current() {
-        AuthenticatedSession.login();
+        login();
         return template.exchange(endpoint + "current", HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Round.class).getBody();
