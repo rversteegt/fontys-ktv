@@ -1,0 +1,51 @@
+{% extends "dashboard/index.twig" %}
+
+{% block title %}
+    Wedstrijden
+{% endblock %}
+
+{% block heading %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Wedstrijden
+                <a href="/mok/competitions/new" class="btn btn-default btn-header">
+                    Nieuwe wedstrijd
+                </a>
+            </h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="error">            
+            </p>
+            {% if competitions is empty%}
+                <p> Er zijn nog geen competities </p>
+            {% else %}
+                <table class="table-link" style="width:50%;">
+                    <thead>
+                    <tr>
+                        <th style="width:30%;">Titel</th>
+                        <th style="width:60%;">Omschrijving</th>
+                        <th style="width:5%;"></th>
+                        <th style="width:5%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for competition in competitions %}
+                        <tr>
+                            <td><a href="/mok/competitions/{{competition.id}}">{{competition.title}}</a></td>
+                            <td><a href="/mok/competitions/{{competition.id}}">{{competition.description}}</a></td>
+                            <td><a href="/mok/competitions/{{competition.id}}/update"><span class="fa fa-edit"></a></td>
+                            <td><a href="#"><span class="fa fa-minus-circle"></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

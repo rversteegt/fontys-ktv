@@ -1,11 +1,13 @@
 package remote.ws.mok.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 /**
  *
  * @author Robert
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     
     private String username;
@@ -19,8 +21,6 @@ public class User {
     private String email;
     
     private String role;
-    
-    private String node;
     
     private double totalscore;
     
@@ -72,14 +72,6 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getNode() {
-        return node;
-    }
-
-    public void setNode(String node) {
-        this.node = node;
     }
 
     public double getTotalscore() {

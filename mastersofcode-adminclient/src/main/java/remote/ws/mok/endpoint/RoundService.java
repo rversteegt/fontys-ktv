@@ -6,45 +6,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.stream.Collectors.toList;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import remote.ws.mok.domain.Competition;
-import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
+import remote.ws.mok.domain.Round;
 
 /**
  *
  * @author Robert
  */
-public class CompetitionService extends AuthenticatedSession {
+public class RoundService extends AuthenticatedSession {
 
-    private final static String endpoint = "http://localhost:8083/api/competitions/";
+    private final static String endpoint = "http://localhost:8083/api/rounds/";
     private final static RestTemplate template = new RestTemplate();
 
-    public static List<Competition> all() {
+    public static List<Round> all() {
         return Arrays.asList(template.exchange(endpoint, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
-                Competition[].class).getBody());
+                Round[].class).getBody());
     }
 
-    public static void add(Competition competition) {
+    public static void add(Round round) {
+
         template.exchange(endpoint, HttpMethod.POST,
-                new HttpEntity<>(competition, credentials()), String.class);
+                new HttpEntity<>(round, credentials()), String.class);
+
     }
 
-    public static void update(Competition competition) {
-        try{
+    public static void update(Round round) {
         template.exchange(endpoint, HttpMethod.PUT,
-                new HttpEntity<>(competition, credentials()), String.class);
-        } catch (HttpClientErrorException ex){
-            System.out.println(ex.getResponseBodyAsString());
-        }
+                new HttpEntity<>(round, credentials()), String.class);
     }
 
-    public static Competition byId(int id) {
+    public static Round byId(int id) {
         return template.exchange(endpoint + id, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
-                Competition.class).getBody();
+                Round.class).getBody();
     }
 }
