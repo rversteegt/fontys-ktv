@@ -20,14 +20,14 @@ public class UserService extends AuthenticatedSession {
     private final static RestTemplate template = new RestTemplate();
 
     public static List<User> all() {
-        AuthenticatedSession.login();
+        login();
         return Arrays.asList(template.exchange(endpoint, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 User[].class).getBody());
     }
     
     public static List<User> allOfRole(String role) {
-        AuthenticatedSession.login();
+        login();
         return Arrays.asList(template.exchange(endpoint, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 User[].class).getBody()).stream()
@@ -36,7 +36,7 @@ public class UserService extends AuthenticatedSession {
     }
 
     public static User byId(String username) {
-        AuthenticatedSession.login();
+        login();
         return template.exchange(endpoint + username, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 User.class).getBody();

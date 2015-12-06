@@ -27,8 +27,8 @@ public class DashboardController {
         
         AuthenticatedSession.login("admin", "admin");
         //CompetitionService.start("999");
-        //RoundService.start("892");
-        
+        RoundService.start("984");
+        //System.out.println(RoundService.current()==null);
         
         mav.addObject("page", new Object() {
             public String uri = "/mok/";

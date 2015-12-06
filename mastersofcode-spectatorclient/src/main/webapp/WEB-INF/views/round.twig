@@ -12,13 +12,13 @@
             <div class="box">
                 <div class="col-lg-12 text-center">
                     <h2 class="brand-before">
-                        <small>Ronde {{id}}</small>
+                        <small>Ronde</small>
                     </h2>
-                    <h1 class="brand-name">Foto's bewerken</h1>
+                    <h1 class="brand-name">{{round.title}}</h1>
                     <hr class="tagline-divider">
                     <h2>
                         <small>
-                            <strong>01:12:53</strong>
+                            <strong>TODO 01:12:53</strong>
                         </small>
                     </h2>
                 </div>
@@ -33,9 +33,26 @@
                         <strong>Ronde informatie</strong>
                     </h2>
                     <hr>
-                    <p>
-                        Opdracht omschrijving, moeilijkheidgraad, uitwerkingen, etc..
-                    </p>
+                    <table class="table-link table-centered" align="center" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:20%;">Opdracht</th>
+                                <th style="width:50%;">Omschrijving</th>
+                                <th style="width:10%;">Duratie</th>
+                                <th style="width:10%;">Moeilijkheid</th>
+                                <th style="width:5%;">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{round.assignment.name}}</td>
+                                <td>{{round.assignment.spectatorDescription}}</td>
+                                <td>{{round.duration}}</td>
+                                <td>{{round.multiplier}}</td>
+                                <td><a href="#"><span class="fa fa-file"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -48,14 +65,26 @@
                         <strong>Teams</strong>
                     </h2>
                     <hr>
-                    <p>
-                        Hier komt een lijst van alle deelnemende teams, met actuele score en eventueel status (bezig, opdracht ingeleverd, ..)
-                    </p>
-                    <ul>
-                        <li><a href="team?id=1">Team 1 naam</a></li>
-                        <li><a href="team?id=2">Team 2 naam</a></li>
-                        <li><a href="team?id=3">Team 3 naam</a></li>
-                    </ul>      
+                    <table class="table-link table-centered" align="center" style="width:70%;">
+                        <thead>
+                            <tr>
+                                <th style="width:40%;">Teamnaam</th>
+                                <th style="width:40%;">Naam teamleider</th>
+                                <th style="width:5%;">Totaalscore</th>
+                                <th style="width:5%;">Uitwerkingen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in teams %}
+                                <tr>
+                                    <td><a href="/spec/team/{{team.username}}">{{team.teamname}}</a></td>
+                                    <td><a href="/spec/team/{{team.username}}">{{team.fullname}}</a></td>
+                                    <td><a href="/spec/team/{{team.username}}">{{team.totalscore}}</a></td>
+                                    <td><a href="#"><span class="fa fa-file-text"></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>   
                 </div>
             </div>
         </div>

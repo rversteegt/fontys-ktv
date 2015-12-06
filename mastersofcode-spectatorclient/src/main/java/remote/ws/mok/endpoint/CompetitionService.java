@@ -23,21 +23,21 @@ public class CompetitionService extends AuthenticatedSession {
     private final static RestTemplate template = new RestTemplate();
 
     public static List<Competition> all() {
-        AuthenticatedSession.login();
+        login();
         return Arrays.asList(template.exchange(endpoint, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Competition[].class).getBody());
     }
 
     public static Competition byId(int id) {
-        AuthenticatedSession.login();
+        login();
         return template.exchange(endpoint + id, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Competition.class).getBody();
     }
 
     public static Competition current() {
-        AuthenticatedSession.login();
+        login();
         return template.exchange(endpoint + "current", HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Competition.class).getBody();

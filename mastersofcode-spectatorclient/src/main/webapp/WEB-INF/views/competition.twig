@@ -14,11 +14,11 @@
                     <h2 class="brand-before">
                         <small>Wedstrijd</small>
                     </h2>
-                    <h1 class="brand-name">De Fotocasus</h1>
+                    <h1 class="brand-name">{{competition.title}}</h1>
                     <hr class="tagline-divider">
                     <h2>
                         <small>
-                            <strong>00:47:33</strong>
+                            <strong>TODO 00:47:33</strong>
                         </small>
                     </h2>
                 </div>
@@ -33,18 +33,32 @@
                         <strong>Rondes</strong>
                     </h2>
                     <hr>
-                    <p>
-                        Dit is wedstrijd {{id}} .
-                    </p>
-                    <p>
-                        Hier komt een lijst van alle rondes
-                    </p>
-                    <ul>
-                        <li><a href="round?id=1">Ronde 1 naam en info</a></li>
-                        <li><a href="round?id=2">Ronde 2 naam en info</a></li>
-                        <li><a href="round?id=3">Ronde 3 naam en info</a></li>
-                        <li><a href="round?id=4">Etc</a></li>
-                    </ul>
+                    {% if competition.rounds is empty%}
+                        <p> Er zijn nog geen rondes </p>
+                    {% else %}
+                        <table class="table-link table-centered" align="center" style="width:70%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%;">Opdracht</th>
+                                    <th style="width:20%;">Duratie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for round in competition.rounds %}
+                                    <tr>
+                                        <td><a href="/spec/round/{{round.id}}">{{round.assignment.artifact}}</a></td>
+                                        <td><a href="/spec/round/{{round.id}}">{{round.duration}}</a></td>
+                                        <td><a href="/spec/round/{{round.id}}">{{round.multiplier}}</a></td>
+                                        <td><a href="/spec/round/{{round.id}}">
+                                                {% if round.id == currentRound.id %}
+                                                    Bezig..
+                                                {% endif %}
+                                            </a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -57,17 +71,31 @@
                         <strong>Teams</strong>
                     </h2>
                     <hr>
-                    <p>
-                        Hier komt een lijst van alle teams
-                    </p>
-                    <ul>
-                        <li><a href="team?id=1">Team 1 naam</a></li>
-                        <li><a href="team?id=2">Team 2 naam</a></li>
-                        <li><a href="team?id=3">Team 3 naam</a></li>
-                    </ul>      
+                    {% if competition.teams is empty%}
+                        <p> Er zijn nog geen teams </p>
+                    {% else %}
+                        <table class="table-link table-centered" align="center" style="width:70%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:40%;">Teamnaam</th>
+                                    <th style="width:40%;">Naam teamleider</th>
+                                    <th style="width:10%;">Totaalscore</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for team in competition.teams %}
+                                    <tr>
+                                        <td><a href="/spec/team/{{team.username}}">{{team.teamname}}</a></td>
+                                        <td><a href="/spec/team/{{team.username}}">{{team.fullname}}</a></td>
+                                        <td><a href="/spec/team/{{team.username}}">{{team.totalscore}}</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}    
                 </div>
             </div>
         </div>
-
     </div>
+
 {% endblock %}

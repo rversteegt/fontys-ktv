@@ -7,6 +7,7 @@ package nl.mok.mastersofcode.spectatorclient.controllers;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import nl.mok.mastersofcode.spectatorclient.controllers.data.DataController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,7 @@ import remote.ws.mok.endpoint.RoundService;
 public class IndexController {
     
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView testDashboard(final HttpServletRequest request) {
+    public ModelAndView showIndex(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();        
         
         mav.addObject("page", new Object() {
@@ -33,9 +34,9 @@ public class IndexController {
             public String redirect = request.getRequestURL().toString();
         });
         
-        mav.addObject("competitions", CompetitionService.all());
-        mav.addObject("currentCompetition", CompetitionService.current());
-        mav.addObject("currentRound", RoundService.current());
+        mav.addObject("competitions", DataController.getCompetitions());
+        mav.addObject("currentCompetition", DataController.getCurrentCompetition());
+        mav.addObject("currentRound", DataController.getCurrentRound());
         
         mav.setViewName("index.twig");
         
