@@ -4,7 +4,6 @@
     Ronde
 {% endblock %}
 
-
 {% block content %}
     <div class="container">
 
@@ -97,9 +96,13 @@
                         <strong>Newsfeed</strong>
                     </h2>
                     <hr>
-                    <p>
-                        Hier kun je de newsfeed lezen
-                    </p>
+                    <ul>
+                        {% for item in newsitems %}
+                            <li>
+                                {{ item }}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

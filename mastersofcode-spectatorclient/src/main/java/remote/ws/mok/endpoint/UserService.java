@@ -5,7 +5,6 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import remote.ws.mok.domain.User;
 import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
