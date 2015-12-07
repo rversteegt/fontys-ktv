@@ -6,10 +6,7 @@
 package nl.mok.mastersofcode.adminclient.helpers;
 
 import java.util.Optional;
-import static java.util.stream.Collectors.toList;
-import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
-import remote.ws.mok.domain.Assignment;
 import remote.ws.mok.domain.Hint;
 
 /**

@@ -8,7 +8,6 @@ package nl.mok.mastersofcode.adminclient.helpers;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import remote.ws.mok.domain.Assignment;
-import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
 
 /**

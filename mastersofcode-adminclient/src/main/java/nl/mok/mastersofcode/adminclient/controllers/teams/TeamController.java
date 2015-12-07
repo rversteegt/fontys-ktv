@@ -1,6 +1,5 @@
 package nl.mok.mastersofcode.adminclient.controllers.teams;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
