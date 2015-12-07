@@ -33,6 +33,7 @@
                             <th style="width:40%;">Omschrijving deelnemers</th>
                             <th style="width:40%;">Omschrijving publiek</th>
                             <th style="width:5%;"></th>
+                            <th style="width:5%;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,11 @@
                                 <td><a href="/mok/assignments/{{assignment.artifact}}">{{assignment.name}}</a></td>
                                 <td><a href="/mok/assignments/{{assignment.artifact}}">{{assignment.participantDescription}}</a></td>
                                 <td><a href="/mok/assignments/{{assignment.artifact}}">{{assignment.spectatorDescription}}</a></td>
+                                <td>
+                                    <a href="/mok/assignments/{{assignment.artifact}}/update">
+                                        <span class="fa fa-edit"></span>
+                                    </a>
+                                </td>
                                 <td><a href="#"><span class="fa fa-minus-circle"></a></td>
                             </tr>
                         {% endfor %}

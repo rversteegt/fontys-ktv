@@ -1,17 +1,13 @@
 package remote.ws.mok.endpoint;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static java.util.stream.Collectors.toList;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
+import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
 
 /**
  *
@@ -29,13 +25,16 @@ public class RoundService extends AuthenticatedSession {
     }
 
     public static void add(Round round) {
-
         template.exchange(endpoint, HttpMethod.POST,
                 new HttpEntity<>(round, credentials()), String.class);
-
     }
 
     public static void update(Round round) {
+        template.exchange(endpoint, HttpMethod.PUT,
+                new HttpEntity<>(round, credentials()), String.class);
+    }
+    
+    public static void delete(Round round) {
         template.exchange(endpoint, HttpMethod.PUT,
                 new HttpEntity<>(round, credentials()), String.class);
     }

@@ -1,17 +1,16 @@
 package remote.ws.mok.endpoint;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import remote.ws.mok.domain.Competition;
+import remote.ws.mok.domain.Round;
 import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
+import static remote.ws.mok.endpoint.RoundService.add;
+import static remote.ws.mok.endpoint.RoundService.delete;
 
 /**
  *
@@ -47,10 +46,14 @@ public class CompetitionService extends AuthenticatedSession {
                 new HttpEntity<>(null, credentials()),
                 Competition.class).getBody();
     }
-
-    public static void start(String id) {
-        template.exchange(endpoint + "current", HttpMethod.POST,
-                new HttpEntity<>(id, credentials()), String.class);
+    
+    public static void startCompetition(Competition competition) {
+        template.exchange(endpoint + "current/", HttpMethod.POST,
+                new HttpEntity<>(competition, credentials()), String.class);
     }
-
+    
+    public static void stopCurrentCompetition() {
+        template.exchange(endpoint + "current/stop", HttpMethod.POST,
+                new HttpEntity<>(credentials()), String.class);
+    }
 }
