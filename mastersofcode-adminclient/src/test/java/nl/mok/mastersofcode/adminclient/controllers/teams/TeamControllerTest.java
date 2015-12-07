@@ -41,6 +41,8 @@ public class TeamControllerTest {
     
     @Before
     public void setUp() {
+        PowerMockito.mockStatic(AuthenticatedSession.class, i -> null);
+        
         mockRequest = Mockito.mock(HttpServletRequest.class);
         Mockito.when(mockRequest.getRequestURL()).
                 thenReturn(new StringBuffer(""));
