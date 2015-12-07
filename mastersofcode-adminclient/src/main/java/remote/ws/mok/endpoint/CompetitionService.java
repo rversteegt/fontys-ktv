@@ -7,10 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import remote.ws.mok.domain.Competition;
-import remote.ws.mok.domain.Round;
 import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
-import static remote.ws.mok.endpoint.RoundService.add;
-import static remote.ws.mok.endpoint.RoundService.delete;
 
 /**
  *

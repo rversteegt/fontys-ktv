@@ -5,9 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import remote.ws.mok.endpoint.AuthenticatedSession;
-import remote.ws.mok.endpoint.CompetitionService;
-import remote.ws.mok.endpoint.RoundService;
 
 /**
  *
@@ -24,11 +21,6 @@ public class DashboardController {
     @RequestMapping(method = RequestMethod.GET, value = "dashboard")
     public ModelAndView showDashboard(final HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        
-        AuthenticatedSession.login("admin", "admin");
-        //CompetitionService.start("999");
-        RoundService.start("984");
-        //System.out.println(RoundService.current()==null);
         
         mav.addObject("page", new Object() {
             public String uri = "/mok/";

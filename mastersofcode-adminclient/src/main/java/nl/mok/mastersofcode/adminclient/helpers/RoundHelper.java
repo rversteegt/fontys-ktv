@@ -5,7 +5,6 @@
  */
 package nl.mok.mastersofcode.adminclient.helpers;
 
-import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import remote.ws.mok.domain.Assignment;

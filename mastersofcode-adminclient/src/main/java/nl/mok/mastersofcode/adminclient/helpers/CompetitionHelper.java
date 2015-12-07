@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
 import remote.ws.mok.domain.User;
-import static remote.ws.mok.endpoint.CompetitionService.add;
-import static remote.ws.mok.endpoint.RoundService.delete;
 
 /**
  *
@@ -69,6 +67,12 @@ public class CompetitionHelper {
         
     }
     
+    /**
+     * Adds a user to a competition.
+     * @param competition the competition.
+     * @param user the user.
+     * @return competition.
+     */
     public static Competition addUser(Competition competition, User user) {
 
         competition.setTeams(

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
-import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
 import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
 
