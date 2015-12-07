@@ -33,10 +33,10 @@ public class CompetitionService extends AuthenticatedSession {
     }
 
     public static void update(Competition competition) {
-        try{
-        template.exchange(endpoint, HttpMethod.PUT,
-                new HttpEntity<>(competition, credentials()), String.class);
-        } catch (HttpClientErrorException ex){
+        try {
+            template.exchange(endpoint, HttpMethod.PUT,
+                    new HttpEntity<>(competition, credentials()), String.class);
+        } catch (HttpClientErrorException ex) {
             System.out.println(ex.getResponseBodyAsString());
         }
     }

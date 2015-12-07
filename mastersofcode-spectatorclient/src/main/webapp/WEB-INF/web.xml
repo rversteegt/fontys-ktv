@@ -39,7 +39,7 @@
         -->
 	<servlet-mapping>
 		<servlet-name>spring-dispatcher</servlet-name>
-		<url-pattern>/mok/*</url-pattern>
+		<url-pattern>/spec/*</url-pattern>
 	</servlet-mapping>
         
 </web-app>
