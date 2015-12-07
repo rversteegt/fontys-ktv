@@ -235,5 +235,17 @@ public class CompetitionController {
 
         return new ModelAndView("redirect:/mok/competitions/" + competitionId);
     }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/start")
+    public ModelAndView startCompetition(final HttpServletRequest request,
+            @PathVariable("id") int competitionId) {
+
+        AuthenticatedSession.login("admin", "admin");
+        
+        CompetitionService.startCompetition(CompetitionService.
+                byId(competitionId));
+
+        return new ModelAndView("redirect:/mok/competitions/" + competitionId);
+    }
 
 }

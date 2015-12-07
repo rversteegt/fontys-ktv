@@ -7,7 +7,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import remote.ws.mok.domain.Competition;
+import remote.ws.mok.domain.Round;
 import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
+import static remote.ws.mok.endpoint.RoundService.add;
+import static remote.ws.mok.endpoint.RoundService.delete;
 
 /**
  *
@@ -42,5 +45,15 @@ public class CompetitionService extends AuthenticatedSession {
         return template.exchange(endpoint + id, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Competition.class).getBody();
+    }
+    
+    public static void startCompetition(Competition competition) {
+        template.exchange(endpoint + "current/", HttpMethod.POST,
+                new HttpEntity<>(competition, credentials()), String.class);
+    }
+    
+    public static void stopCurrentCompetition() {
+        template.exchange(endpoint + "current/stop", HttpMethod.POST,
+                new HttpEntity<>(credentials()), String.class);
     }
 }

@@ -50,7 +50,7 @@ public class AssignmentController {
             public String redirect = request.getRequestURL().toString();
         });
 
-        mav.setViewName("assignments/assignments_new.twig");
+        mav.setViewName("assignments/assignment_new.twig");
         
         return mav;
     }
@@ -66,6 +66,35 @@ public class AssignmentController {
             AssignmentService.add(assignmentOpt.get());
         }
 
+        return new ModelAndView("redirect:/mok/assignments");
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value="/{artifact}/update")
+    public ModelAndView showUpdateAssignment(final HttpServletRequest request, 
+            @PathVariable(value = "artifact") String artifact) {
+        ModelAndView mav = new ModelAndView();
+        
+        AuthenticatedSession.login("admin", "admin");
+        mav.addObject("assignment", AssignmentService.byId(artifact));
+        
+        mav.addObject("page", new Object() {
+            public String uri = "/mok/assignment";
+            public String redirect = request.getRequestURL().toString();
+        });
+
+        mav.setViewName("assignments/assignment_update.twig");
+        
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value="/{artifact}/update")
+    public ModelAndView updateAssignment(final HttpServletRequest request, 
+            @PathVariable(value = "artifact") String artifact) {
+        AssignmentHelper.createAssignment(request).ifPresent(a -> {
+            AuthenticatedSession.login("admin", "admin");
+            AssignmentService.update(a);
+        });
+        
         return new ModelAndView("redirect:/mok/assignments");
     }
     

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
+import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
+import static remote.ws.mok.endpoint.AuthenticatedSession.credentials;
 
 /**
  *
@@ -23,13 +25,16 @@ public class RoundService extends AuthenticatedSession {
     }
 
     public static void add(Round round) {
-
         template.exchange(endpoint, HttpMethod.POST,
                 new HttpEntity<>(round, credentials()), String.class);
-
     }
 
     public static void update(Round round) {
+        template.exchange(endpoint, HttpMethod.PUT,
+                new HttpEntity<>(round, credentials()), String.class);
+    }
+    
+    public static void delete(Round round) {
         template.exchange(endpoint, HttpMethod.PUT,
                 new HttpEntity<>(round, credentials()), String.class);
     }
@@ -38,5 +43,10 @@ public class RoundService extends AuthenticatedSession {
         return template.exchange(endpoint + id, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Round.class).getBody();
+    }
+    
+    public static void startRound(Round round) {
+        template.exchange(endpoint + "current/", HttpMethod.DELETE,
+                new HttpEntity<>(round, credentials()), String.class);
     }
 }
