@@ -39,12 +39,12 @@ public class ParserTest {
      */
     @Test
     public void testParseInt() {
-        String a = "1", b = "120", c = "a9", d = "0,1", e = "1.0";
+        String a = "1", b = "120", c = "-01", d = "a9", e = "0,1", f = "1.0";
         
-        Stream.of(a, b).map(s -> Parser.parseInt(s)).
+        Stream.of(a, b, c).map(s -> Parser.parseInt(s)).
                 forEach(i -> assertTrue(i.isPresent()));
         
-        Stream.of(c, d, e).map(s -> Parser.parseInt(s)).
+        Stream.of(d, e, f).map(s -> Parser.parseInt(s)).
                 forEach(i -> assertFalse(i.isPresent()));
     }
     
