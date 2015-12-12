@@ -38,4 +38,11 @@ public class CompetitionService extends AuthenticatedSession {
                 Competition.class).getBody();
     }
 
+    public static boolean start(String id) {
+        login();
+        return template.exchange(endpoint + "current", HttpMethod.POST,
+                new HttpEntity<>(null, credentials()),
+                boolean.class).getBody();
+    }
+    
 }

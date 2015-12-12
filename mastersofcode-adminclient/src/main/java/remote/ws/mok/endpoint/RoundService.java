@@ -23,6 +23,12 @@ public class RoundService extends AuthenticatedSession {
                 Round[].class).getBody());
     }
 
+    public static Round current() {
+        return template.exchange(endpoint + "current", HttpMethod.GET,
+                new HttpEntity<>(null, credentials()),
+                Round.class).getBody();
+    }
+
     public static void add(Round round) {
         template.exchange(endpoint, HttpMethod.POST,
                 new HttpEntity<>(round, credentials()), String.class);
@@ -32,7 +38,7 @@ public class RoundService extends AuthenticatedSession {
         template.exchange(endpoint, HttpMethod.PUT,
                 new HttpEntity<>(round, credentials()), String.class);
     }
-    
+
     public static void delete(Round round) {
         template.exchange(endpoint, HttpMethod.PUT,
                 new HttpEntity<>(round, credentials()), String.class);
@@ -44,15 +50,8 @@ public class RoundService extends AuthenticatedSession {
                 Round.class).getBody();
     }
 
-    public static void start(String id) {
-        template.exchange(endpoint + "current", HttpMethod.POST,
-                new HttpEntity<>(id, credentials()), String.class);
-
-    }
-
-    public static Round current() {
-        return template.exchange(endpoint + "current", HttpMethod.GET,
-                new HttpEntity<>(null, credentials()),
-                Round.class).getBody();
+    public static boolean start(String id) {
+        return template.exchange(endpoint + "current", HttpMethod.POST,
+                new HttpEntity<>(id, credentials()), boolean.class).getBody();
     }
 }

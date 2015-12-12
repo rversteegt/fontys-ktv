@@ -22,21 +22,29 @@
             <h1>
                 Status
             </h1>
-            <form method="post" action="/mok/competitions/{{competition.id}}/start">
-                <input type="submit" value="Wedstrijd starten"/>
-            </form>
+            {% if currentCompetition is empty %}
+                <form method="post" action="/mok/competitions/{{competition.id}}/start">
+                    <input type="submit" value="Wedstrijd starten"/>
+                </form>
+            {% elseif currentCompetition.id == competition.id %}
+                <form method="post" action="/mok/competitions/{{competition.id}}/stop">
+                    <input type="submit" value="Wedstrijd stoppen"/>
+                </form>
+            {% else %}
+                Er is momenteel een andere wedstrijd bezig.
+            {% endif %}
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-12">
 
             <div class="page-header">
                 <h3>
                     Rondes
-                <a href="/mok/competitions/{{competition.id}}/addround" class="btn btn-default btn-header">
-                    Ronde toevoegen
-                </a>
+                    <a href="/mok/competitions/{{competition.id}}/addround" class="btn btn-default btn-header">
+                        Ronde toevoegen
+                    </a>
                 </h3>
             </div>
 
@@ -46,15 +54,15 @@
                 {% if competition.rounds is empty%}
                     <p> Er zijn nog geen rondes </p>
                 {% else %}
-                    <table class="table-link" style="width:50%;">
+                    <table class="table-link" style="width:100%;">
                         <thead>
                             <tr>
                                 <th style="width:10%">Index</th>
-                                <th style="width:60%;">Opdracht</th>
-                                <th style="width:10%;">Moeilijkheidsgraad</th>
-                                <th style="width:20%;">Duratie</th>
+                                <th style="width:25%;">Opdracht</th>
+                                <th style="width:5%;">Moeilijkheidsgraad</th>
+                                <th style="width:5%;">Duratie</th>
                                 <th style="width:5%;"></th>
-                                <th style="width:5%;"></th>
+                                <th style="width:50%;"></th>
                             </tr>
                         </thead>
                         <tbody id="sortable" class="sortable">
@@ -65,7 +73,25 @@
                                     <td>{{round.multiplier}}</td>
                                     <td>{{round.duration}}</td>
                                     <td><a href="/mok/competitions/{{competition.id}}/{{round.id}}/update"><span class="fa fa-edit"></a></td>
-                                    <td><a href="#"><span class="fa fa-minus-circle"></a></td>
+                                    <td>
+                                        {% if currentRound is empty %}
+                                            <form method="post" action="/mok/competitions/{{competition.id}}/{{round.id}}/start">
+                                                <input type="submit" value="Ronde starten"/>
+                                            </form>
+                                        {% elseif currentRound.id == round.id %}
+                                            <form method="post" action="/mok/competitions/{{competition.id}}/{{round.id}}/pause" style="float:left;">
+                                                <input type="submit" value="Pauzeer/hervat ronde"/>
+                                            </form>
+                                            <form method="post" action="/mok/competitions/{{competition.id}}/{{round.id}}/freeze" style="float:left;">
+                                                <input type="submit" value="Bevries ronde"/>
+                                            </form>
+                                            <form method="post" action="/mok/competitions/{{competition.id}}/{{round.id}}/stop" style="float:left;">
+                                                <input type="submit" value="Stop ronde"/>
+                                            </form>
+                                        {% else %}
+                                            Er is momenteel een andere ronde bezig.
+                                        {% endif %}  
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -81,9 +107,9 @@
             <div class="page-header">
                 <h3>
                     Teams
-                <a href="/mok/competitions/{{competition.id}}/addteam" class="btn btn-default btn-header" style="float:right;">
-                    Team toevoegen
-                </a>
+                    <a href="/mok/competitions/{{competition.id}}/addteam" class="btn btn-default btn-header" style="float:right;">
+                        Team toevoegen
+                    </a>
                 </h3>
             </div>
 
