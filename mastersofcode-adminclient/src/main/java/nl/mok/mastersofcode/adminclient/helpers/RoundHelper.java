@@ -8,7 +8,6 @@ package nl.mok.mastersofcode.adminclient.helpers;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import remote.ws.mok.domain.Assignment;
-import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
 
 /**
@@ -47,7 +46,7 @@ public class RoundHelper {
         } 
     }
     
-        /**
+    /**
      * updates a round with new values placed in the request
      * 
      * @param request
@@ -70,8 +69,7 @@ public class RoundHelper {
             round.setDuration(duration);
             round.setMultiplier(multiplier);
             return Optional.of(round);
-        } 
-        
+        }
     }
     
 }

@@ -1,11 +1,7 @@
 package remote.ws.mok.endpoint;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
@@ -34,10 +30,10 @@ public class CompetitionService extends AuthenticatedSession {
     }
 
     public static void update(Competition competition) {
-        try{
-        template.exchange(endpoint, HttpMethod.PUT,
-                new HttpEntity<>(competition, credentials()), String.class);
-        } catch (HttpClientErrorException ex){
+        try {
+            template.exchange(endpoint, HttpMethod.PUT,
+                    new HttpEntity<>(competition, credentials()), String.class);
+        } catch (HttpClientErrorException ex) {
             System.out.println(ex.getResponseBodyAsString());
         }
     }
@@ -46,5 +42,15 @@ public class CompetitionService extends AuthenticatedSession {
         return template.exchange(endpoint + id, HttpMethod.GET,
                 new HttpEntity<>(null, credentials()),
                 Competition.class).getBody();
+    }
+    
+    public static void startCompetition(Competition competition) {
+        template.exchange(endpoint + "current/", HttpMethod.POST,
+                new HttpEntity<>(competition, credentials()), String.class);
+    }
+    
+    public static void stopCurrentCompetition() {
+        template.exchange(endpoint + "current/stop", HttpMethod.POST,
+                new HttpEntity<>(credentials()), String.class);
     }
 }

@@ -12,7 +12,8 @@ import remote.ws.mok.domain.Assignment;
  * @author Robert
  */
 public class AssignmentService extends AuthenticatedSession {
-    private final static String endpoint = "http://localhost:8083/api/assignments/";
+    private final static String endpoint = 
+            "http://localhost:8083/api/assignments/";
     private final static RestTemplate template = new RestTemplate();
     
     public static List<Assignment> all() {

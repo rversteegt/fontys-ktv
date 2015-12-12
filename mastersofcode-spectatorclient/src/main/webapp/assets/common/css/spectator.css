@@ -1,0 +1,40 @@
+
+.btn-header{
+    float:right;
+}
+
+.table-link{
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width:100%;
+}
+
+.table-link th{
+    border-bottom: 2px solid #afafaf;
+}
+
+.table-link a{
+    margin: 0;
+    padding: 10px;
+    display: block;
+    text-decoration: none;    
+    color: inherit;
+}
+
+.table-link tbody tr{
+    border-bottom: 1px solid #cccccc
+}
+
+.table-link tbody tr:hover{
+    background-color: #eeeeee;
+}
+
+.table-link thead th{
+    padding: 10px;
+}
+
+.table-centered{
+       margin-left: auto;
+   margin-right: auto;
+}

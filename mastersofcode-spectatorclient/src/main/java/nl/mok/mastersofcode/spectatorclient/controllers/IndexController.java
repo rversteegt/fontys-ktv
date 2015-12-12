@@ -6,6 +6,7 @@
 package nl.mok.mastersofcode.spectatorclient.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import nl.mok.mastersofcode.spectatorclient.controllers.data.DataController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,20 +17,23 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Gijs
  */
 @Controller
-@RequestMapping("/contest")
-public class ContestController {
+@RequestMapping("/")
+public class IndexController {
     
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView testDashboard(final HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
+    public ModelAndView showIndex(final HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();        
         
         mav.addObject("page", new Object() {
-            public String uri = "/mok/contest";
+            public String uri = "/spec/";
             public String redirect = request.getRequestURL().toString();
         });
-
-        mav.addObject("id", request.getParameter("id"));
-        mav.setViewName("contest.twig");
+        
+        mav.addObject("competitions", DataController.getCompetitions());
+        mav.addObject("currentCompetition", DataController.getCurrentCompetition());
+        mav.addObject("currentRound", DataController.getCurrentRound());
+        
+        mav.setViewName("index.twig");
         
         return mav;
     }
