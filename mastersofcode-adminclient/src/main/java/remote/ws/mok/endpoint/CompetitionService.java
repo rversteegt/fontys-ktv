@@ -23,6 +23,12 @@ public class CompetitionService extends AuthenticatedSession {
                 new HttpEntity<>(null, credentials()),
                 Competition[].class).getBody());
     }
+    
+    public static Competition current() {
+        return template.exchange(endpoint + "current", HttpMethod.GET,
+                new HttpEntity<>(null, credentials()),
+                Competition.class).getBody();
+    }
 
     public static void add(Competition competition) {
         template.exchange(endpoint, HttpMethod.POST,
@@ -43,14 +49,15 @@ public class CompetitionService extends AuthenticatedSession {
                 new HttpEntity<>(null, credentials()),
                 Competition.class).getBody();
     }
-    
-    public static void startCompetition(Competition competition) {
-        template.exchange(endpoint + "current/", HttpMethod.POST,
-                new HttpEntity<>(competition, credentials()), String.class);
+
+    public static boolean startCompetition(String id) {
+        return template.exchange(endpoint + "current", HttpMethod.POST,
+                new HttpEntity<>(id, credentials()),
+                boolean.class).getBody();
     }
-    
+
     public static void stopCurrentCompetition() {
-        template.exchange(endpoint + "current/stop", HttpMethod.POST,
-                new HttpEntity<>(credentials()), String.class);
+        template.exchange(endpoint + "current/stop", HttpMethod.GET,
+                new HttpEntity<>(null, credentials()), String.class);
     }
 }

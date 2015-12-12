@@ -2,6 +2,9 @@ package nl.mok.mastersofcode.adminclient.controllers.competitions;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import nl.mok.mastersofcode.adminclient.helpers.CompetitionHelper;
 import nl.mok.mastersofcode.adminclient.helpers.RoundHelper;
@@ -15,6 +18,7 @@ import remote.ws.mok.domain.Competition;
 import remote.ws.mok.domain.Round;
 import remote.ws.mok.endpoint.AssignmentService;
 import remote.ws.mok.endpoint.AuthenticatedSession;
+import remote.ws.mok.endpoint.ClockService;
 import remote.ws.mok.endpoint.CompetitionService;
 import remote.ws.mok.endpoint.RoundService;
 import remote.ws.mok.endpoint.UserService;
@@ -85,6 +89,8 @@ public class CompetitionController {
         });
 
         AuthenticatedSession.login("admin", "admin");
+        mav.addObject("currentCompetition", CompetitionService.current());
+        mav.addObject("currentRound", RoundService.current());
         mav.addObject("competition", CompetitionService.byId(id));
 
         mav.setViewName("competitions/competition.twig");
@@ -200,8 +206,8 @@ public class CompetitionController {
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("page", new Object() {
-            public String uri = "/mok/competitions/" + competitionId + 
-                    "/" + roundId + "/updateround";
+            public String uri = "/mok/competitions/" + competitionId
+                    + "/" + roundId + "/updateround";
             public String redirect = request.getRequestURL().toString();
         });
 
@@ -235,15 +241,80 @@ public class CompetitionController {
 
         return new ModelAndView("redirect:/mok/competitions/" + competitionId);
     }
-    
+
     @RequestMapping(method = RequestMethod.POST, value = "/{id}/start")
     public ModelAndView startCompetition(final HttpServletRequest request,
             @PathVariable("id") int competitionId) {
 
         AuthenticatedSession.login("admin", "admin");
-        
-        CompetitionService.startCompetition(CompetitionService.
-                byId(competitionId));
+
+        CompetitionService.startCompetition(Integer.toString(competitionId));
+
+        return new ModelAndView("redirect:/mok/competitions/" + competitionId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/stop")
+    public ModelAndView stopCompetition(final HttpServletRequest request,
+            @PathVariable("id") int competitionId) {
+
+        AuthenticatedSession.login("admin", "admin");
+
+        CompetitionService.stopCurrentCompetition();
+
+        return new ModelAndView("redirect:/mok/competitions/" + competitionId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/{competitionId}/{roundId}/start")
+    public ModelAndView startRound(final HttpServletRequest request,
+            @PathVariable("competitionId") int competitionId,
+            @PathVariable("roundId") int roundId) {
+
+        AuthenticatedSession.login("admin", "admin");
+
+        RoundService.start(Integer.toString(roundId));
+
+        return new ModelAndView("redirect:/mok/competitions/" + competitionId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/{competitionId}/{roundId}/pause")
+    public ModelAndView pauseRound(final HttpServletRequest request,
+            @PathVariable("competitionId") int competitionId,
+            @PathVariable("roundId") int roundId) {
+
+        AuthenticatedSession.login("admin", "admin");
+        ClockService.pauseOrResume();
+        return new ModelAndView("redirect:/mok/competitions/" + competitionId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/{competitionId}/{roundId}/freeze")
+    public ModelAndView freezeRound(final HttpServletRequest request,
+            @PathVariable("competitionId") int competitionId,
+            @PathVariable("roundId") int roundId) {
+
+        AuthenticatedSession.login("admin", "admin");
+        ClockService.freeze();
+        return new ModelAndView("redirect:/mok/competitions/" + competitionId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/{competitionId}/{roundId}/stop")
+    public ModelAndView stopRound(final HttpServletRequest request,
+            @PathVariable("competitionId") int competitionId,
+            @PathVariable("roundId") int roundId) {
+
+        AuthenticatedSession.login("admin", "admin");
+        ClockService.stop();
+
+        //delay to ensure visability of stopping round
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CompetitionController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
 
         return new ModelAndView("redirect:/mok/competitions/" + competitionId);
     }
